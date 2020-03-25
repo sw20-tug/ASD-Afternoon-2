@@ -50,16 +50,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class Hotel(){
-        var hotel_price;
-    }
+//    class Hotel(){
+//        var hotel_price;
+//    }
 
-    public fun inPriceRange(var minPrice:Int, var maxPrice:Int, var hotel:Hotel):Boolean{
-        if((hotel.hotel_price<=maxPrice) && (hotel.hotel_price>=minPrice))
-            return true;
-        else
-            return false;
-    }
+//    public fun inPriceRange(var minPrice:Int, var maxPrice:Int, var hotel:Hotel):Boolean{
+//        if((hotel.hotel_price<=maxPrice) && (hotel.hotel_price>=minPrice))
+//            return true;
+//        else
+//            return false;
+//    }
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
