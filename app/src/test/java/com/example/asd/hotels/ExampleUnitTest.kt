@@ -17,6 +17,5 @@ class ExampleUnitTest {
 /**    @Test
     fun testFilterPrice(){
     assertTrue("Not in Price range", inPriceRange(100,0));
-    }
- */
+    }*/
 }
