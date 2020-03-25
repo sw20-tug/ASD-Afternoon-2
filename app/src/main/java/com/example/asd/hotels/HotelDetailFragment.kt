@@ -1,12 +1,11 @@
 package com.example.asd.hotels
 
 import android.os.Bundle
-import android.service.autofill.TextValueSanitizer
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.asd.hotels.dummy.DummyContent
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
@@ -34,7 +33,7 @@ class HotelDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
+                //activity?.toolbar_layout?.title = item?.content
             }
         }
 
