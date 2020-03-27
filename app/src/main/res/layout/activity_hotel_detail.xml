@@ -29,9 +29,26 @@
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
             <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/ratingBar"/>
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="10"
+                android:stepSize="0.5" />
+
+            <Button
+                android:id="@+id/btnrating"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#0DBFAC"
+                android:text="Submit Rating"
+                android:textSize="10sp" />
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -41,6 +58,7 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </androidx.core.widget.NestedScrollView>
+
     <androidx.core.widget.NestedScrollView
             android:id="@+id/hotel_picture_container"
             android:layout_width="wrap_content"
@@ -56,4 +74,5 @@
             app:srcCompat="@android:drawable/stat_notify_chat"
             app:layout_anchor="@+id/hotel_detail_container"
             app:layout_anchorGravity="top|end"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

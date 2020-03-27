@@ -3,7 +3,11 @@ package com.example.asd.hotels
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
 
@@ -23,6 +27,14 @@ class HotelDetailActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        }
+
+        val ratingbar = findViewById<RatingBar>(R.id.ratingBar);
+
+        val ratingbutton = findViewById<Button>(R.id.btnrating);
+        ratingbutton.setOnClickListener() {
+            val msg = ratingbar.rating.toString()
+            Toast.makeText(this@HotelDetailActivity, "Rating is: " + msg, Toast.LENGTH_LONG).show();
         }
 
         // Show the Up button in the action bar.
