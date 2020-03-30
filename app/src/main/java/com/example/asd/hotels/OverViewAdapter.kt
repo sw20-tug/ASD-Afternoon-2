@@ -10,22 +10,27 @@ import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.hotel_layout.view.*
 
 class OverViewAdapter(private val hotel_details: List<HotelData>) :
-    RecyclerView.Adapter<OverViewAdapter.ViewHolder>(){
+    RecyclerView.Adapter<OverViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutView = LayoutInflater.from(parent.context).inflate(
             R.layout.hotel_layout,
-            parent, false)
-        return  ViewHolder(layoutView)
+            parent, false
+        )
+        return ViewHolder(layoutView)
     }
 
     // Limits the list of view
     override fun getItemCount() = hotel_details.size
 
+    // For every row different content.
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel_detail = hotel_details[position]
         holder.view.txt_location.text = hotel_detail.location;
         holder.view.txt_price.text = hotel_detail.price.toString();
+        holder.view.img_hotel.setImageDrawable(
+            holder.view.context.getDrawable(hotel_detail.image)
+        )
     }
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)

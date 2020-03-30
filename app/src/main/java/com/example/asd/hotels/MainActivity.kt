@@ -27,10 +27,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val hotel_values = listOf(
-            HotelData("Germany", 799),
-            HotelData("Austria", 499),
-            HotelData("Sweden", 1399),
-            HotelData("Hungary", 299)
+            HotelData("Germany", 799, R.drawable.untitled),
+            HotelData("Austria", 499, R.drawable.untitled),
+            HotelData("Sweden", 1399, R.drawable.untitled),
+            HotelData("Hungary", 299, R.drawable.untitled)
         )
 
         // Setting up the adapter
