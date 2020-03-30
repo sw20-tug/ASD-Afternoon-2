@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.asd.hotels.dummy.HotelData
 import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,13 +26,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val hotel_values = listOf(
+            HotelData("Germany", 799),
+            HotelData("Austria", 499),
+            HotelData("Sweden", 1399),
+            HotelData("Hungary", 299)
+        )
+
+        // Setting up the adapter
         OverView.apply {
+            // Set up the layer
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = OverViewAdapter()
+            // Pass the list into OverViewAdapter
+            adapter = OverViewAdapter(hotel_values)
         }
 
         // Example of a call to a native method
-        sample_text.text = stringFromJNI()
+//        sample_text.text = stringFromJNI()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
