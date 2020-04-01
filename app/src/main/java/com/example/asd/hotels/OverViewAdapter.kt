@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.asd.hotels.R
 import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.hotel_layout.view.*
 

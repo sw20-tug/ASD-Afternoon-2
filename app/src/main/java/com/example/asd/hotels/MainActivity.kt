@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asd.hotels.dummy.HotelData
-import com.google.android.material.snackbar.Snackbar
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
             // Pass the list into OverViewAdapter
             adapter = OverViewAdapter(hotel_values)
         }
+
+        // Add item separator to the overview.
+        val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        OverView.addItemDecoration(itemDecor)
 
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
