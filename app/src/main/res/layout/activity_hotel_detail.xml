@@ -28,10 +28,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:navigationIcon="?attr/homeAsUpIndicator"/>
+
             <RatingBar
+                    android:id="@+id/ratingBar"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/ratingBar"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:isIndicator="true"
+                    android:numStars="10"
+                    android:max="10"
+                    android:rating="0"
+                    style="@style/Widget.AppCompat.RatingBar.Small"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -39,8 +48,7 @@
             android:id="@+id/hotel_detail_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </androidx.core.widget.NestedScrollView>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
     <androidx.core.widget.NestedScrollView
             android:id="@+id/hotel_picture_container"
             android:layout_width="wrap_content"
