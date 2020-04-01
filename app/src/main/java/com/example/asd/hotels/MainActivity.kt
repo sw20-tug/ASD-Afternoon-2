@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main_sorted.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,13 +27,29 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        var overViewVisible = true
+        sort_button_stars.setOnClickListener{
+            if(overViewVisible)
+            {
+                OverView.setVisibility(View.INVISIBLE)
+                SortingView.setVisibility(View.VISIBLE)
+                overViewVisible = false
+            }
+            else
+            {
+                OverView.setVisibility(View.VISIBLE)
+                SortingView.setVisibility(View.GONE)
+                overViewVisible = true
+            }
+        }
+
         OverView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = OverViewAdapter()
         }
 
         // Example of a call to a native method
-        sample_text.text = stringFromJNI()
+        //sample_text.text = stringFromJNI()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*
     class Hotel(){
         var hotel_price;
     }
@@ -60,6 +79,8 @@ class MainActivity : AppCompatActivity() {
         else
             return false;
     }
+
+    */
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
