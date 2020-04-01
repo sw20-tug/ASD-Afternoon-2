@@ -1,6 +1,7 @@
 package com.example.asd.hotels
 
 import android.annotation.SuppressLint
+import android.util.Log.d
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,10 @@ import android.view.ViewGroup
 import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.hotel_layout.view.*
 
-class OverViewAdapter(private val hotel_details: List<HotelData>) :
+class OverViewAdapter(
+    private val hotel_details: List<HotelData>,
+    private val overviewClicked: () -> Unit
+) :
     RecyclerView.Adapter<OverViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutView = LayoutInflater.from(parent.context).inflate(
@@ -30,6 +34,11 @@ class OverViewAdapter(private val hotel_details: List<HotelData>) :
         holder.view.img_hotel.setImageDrawable(
             holder.view.context.getDrawable(hotel_detail.image)
         )
+        holder.view.setOnClickListener {
+            d("Matthias", "clicked!")
+            // Callback to the MainActivity
+            overviewClicked.invoke()
+        }
     }
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)

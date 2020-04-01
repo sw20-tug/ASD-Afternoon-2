@@ -2,6 +2,7 @@ package com.example.asd.hotels
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,11 @@ class MainActivity : AppCompatActivity() {
             // Set up the layer
             layoutManager = LinearLayoutManager(this@MainActivity)
             // Pass the list into OverViewAdapter
-            adapter = OverViewAdapter(hotel_values)
+            adapter = OverViewAdapter(hotel_values) {
+                d("Matthias","Hi from main")
+                startActivity(Intent(this@MainActivity,
+                    HotelDetailActivity::class.java))
+            }
         }
 
         // Add item separator to the overview.
