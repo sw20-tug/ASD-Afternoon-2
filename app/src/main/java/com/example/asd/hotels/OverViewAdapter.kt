@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.asd.hotels.dummy.HotelData
+import kotlinx.android.synthetic.main.activity_hotel_detail.view.*
 import kotlinx.android.synthetic.main.hotel_layout.view.*
 
 class OverViewAdapter(
@@ -30,12 +31,14 @@ class OverViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel_detail = hotel_details[position]
         holder.view.txt_location.text = hotel_detail.location;
-        holder.view.txt_price.text = hotel_detail.price.toString();
+        holder.view.txt_price.text = "€ " + hotel_detail.price.toString();
         holder.view.img_hotel.setImageDrawable(
             holder.view.context.getDrawable(hotel_detail.image)
         )
+        holder.view.ratingBar.rating = 1;
+        holder.view.txt_description.text = hotel_detail.hotel_description;
         holder.view.setOnClickListener {
-            d("Matthias", "clicked!")
+            d("OverViewAdapter", "clicked!")
             // Callback to the MainActivity
             overviewClicked.invoke()
         }

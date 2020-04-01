@@ -28,10 +28,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         val hotel_values = listOf(
-            HotelData("Germany", 799, R.drawable.untitled),
-            HotelData("Austria", 499, R.drawable.untitled),
-            HotelData("Sweden", 1399, R.drawable.untitled),
-            HotelData("Hungary", 299, R.drawable.untitled)
+            HotelData(1, 1, "Vienna", R.drawable.untitled,
+                "Sample Name", 500, 200,
+                "Test description for vienna"),
+            HotelData(2, 1, "Graz", R.drawable.untitled,
+                "Sample Name", 500, 200,
+                "Test description for Graz")
         )
 
         // Setting up the adapter
@@ -40,7 +42,8 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             // Pass the list into OverViewAdapter
             adapter = OverViewAdapter(hotel_values) {
-                d("Matthias","Hi from main")
+                d("MainActivity","Hi from main")
+                // Call the detail view.
                 startActivity(Intent(this@MainActivity,
                     HotelDetailActivity::class.java))
             }
@@ -85,13 +88,13 @@ class MainActivity : AppCompatActivity() {
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
-    external fun stringFromJNI(): String
-
-    companion object {
-
-        // Used to load the 'native-lib' library on application startup.
-        init {
-            System.loadLibrary("native-lib")
-        }
-    }
+//    external fun stringFromJNI(): String
+//
+//    companion object {
+//
+//        // Used to load the 'native-lib' library on application startup.
+//        init {
+//            System.loadLibrary("native-lib")
+//        }
+//    }
 }
