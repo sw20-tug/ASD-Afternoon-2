@@ -3,6 +3,7 @@ package com.example.asd.hotels
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ListView
 import android.widget.RatingBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -58,9 +59,14 @@ class HotelDetailActivity : AppCompatActivity() {
                     )
                 }
             }
+            val comment_fragment = CommentListFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
             supportFragmentManager.beginTransaction()
                 .add(R.id.hotel_detail_container, hotel_detail_fragment)
                 .add(R.id.hotel_picture_container, hotel_picture_fragment)
+                .add(R.id.comment_list_container, comment_fragment)
                 .commit()
         }
         initializeHotelInfos()

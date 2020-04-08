@@ -10,6 +10,7 @@ import com.example.asd.hotels.dummy.DummyContent
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
 import kotlinx.android.synthetic.main.hotel_detail.view.*
+import kotlinx.android.synthetic.main.hotel_layout.view.*
 
 /**
  * A fragment representing a single Hotel detail screen.
@@ -44,11 +45,11 @@ class HotelDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.hotel_detail, container, false)
-        rootView.hotel_detail.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."//it.details
+        rootView.hotel_detail_text.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."//it.details
 
         // Show the dummy content as text in a TextView.
         item?.let {
-            rootView.hotel_detail.text = it.details
+            rootView.hotel_detail_text.text = it.details
         }
         return rootView
     }
