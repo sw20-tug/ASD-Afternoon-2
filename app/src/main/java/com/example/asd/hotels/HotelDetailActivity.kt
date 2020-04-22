@@ -3,10 +3,9 @@ package com.example.asd.hotels
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ListView
+import android.widget.Button
 import android.widget.RatingBar
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
 
 /**
@@ -22,7 +21,7 @@ class HotelDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel_detail)
         setSupportActionBar(detail_toolbar)
-
+        val hotelId=intent.getIntExtra("hotelId", -1) // todo get real id
         /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -70,7 +69,9 @@ class HotelDetailActivity : AppCompatActivity() {
                 .commit()
         }
         initializeHotelInfos()
-
+        // add button and eventlistener
+        val ratingButton = findViewById<Button>(R.id.rating_button)
+        ratingButton.setOnClickListener{ view -> addRating() }
     }
     fun initializeHotelInfos() {
         // todo set to real name
@@ -81,6 +82,14 @@ class HotelDetailActivity : AppCompatActivity() {
             ratingBar.rating = 4.0F;
         }
     }
+
+    fun addRating() {
+        val id = intent.getIntExtra("hotelId", -1)
+        val intent = Intent(this, MainActivity::class.java) // todo change to RatingActivity
+        intent.putExtra("hotelId", id)
+        startActivity(intent)
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
