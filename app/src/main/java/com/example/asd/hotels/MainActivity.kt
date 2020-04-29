@@ -3,10 +3,13 @@ package com.example.asd.hotels
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import kotlinx.android.synthetic.*
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_seek_bar.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +17,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         setSupportActionBar(toolbar)
+
+
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -42,15 +48,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     class Hotel(){
-        var hotel_price;
+        var hotel_price = 0;
+        var location_id = 0;
     }
 
-    public fun inPriceRange(var minPrice:Int, var maxPrice:Int, var hotel:Hotel):Boolean{
+    fun inPriceRange(minPrice:Int, maxPrice:Int, hotel:Hotel):Boolean{
+        var statePriceR:Boolean = false;
         if((hotel.hotel_price<=maxPrice) && (hotel.hotel_price>=minPrice))
-            return true;
-        else
-            return false;
+            statePriceR = true;
+        return statePriceR;
     }
+    fun filterbyPrice(hotelsToFilter:MutableList<Hotel>){
+        hotelsToFilter.forEach { hotel_inList->
+            //minPrice, maxPrice form RangeSeekBar
+            if(!inPriceRange(0, 100, hotel_inList))
+                hotelsToFilter.remove(hotel_inList);
+        }
+    }
+
+    fun inLocation(location_id:Int, hotel:Hotel):Boolean{
+        var stateLocation:Boolean = false;
+        if(hotel.location_id== location_id)
+            stateLocation = true;
+        return stateLocation;
+    }
+    fun filterbyLocation(){
+
+    }
+
+
+
 
     /**
      * A native method that is implemented by the 'native-lib' native library,

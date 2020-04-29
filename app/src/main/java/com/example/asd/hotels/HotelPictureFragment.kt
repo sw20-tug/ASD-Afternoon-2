@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.asd.hotels.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
 import kotlinx.android.synthetic.main.hotel_detail.view.*
 
