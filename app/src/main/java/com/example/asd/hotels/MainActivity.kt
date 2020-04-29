@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -27,16 +26,40 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //dummy data
+        var hotelDummyList = listOf(
+            HotelData(1, 1, 1, "Beta", 1, 3, "1", 1),
+            HotelData(2, 2, 1, "Alpha", 1, 2, "1", 1),
+            HotelData(3, 1, 1, "Echo", 1, 7, "1", 1),
+            HotelData(4, 1, 1, "Oscar", 1, 14, "1", 1),
+            HotelData(5, 1, 1, "Sierra", 1, 9, "1", 1),
+            HotelData(6, 1, 1, "Golf", 1, 1, "1", 1),
+            HotelData(7, 1, 1, "Charlie", 1, 2, "1", 1),
+            HotelData(8, 1, 1, "Juliet", 1, 3, "1", 1),
+            HotelData(9, 1, 1, "Tango", 1, 4, "1", 1)
+        )
+
+
         var overViewVisible = true
-        sort_button_stars.setOnClickListener{
-            if(overViewVisible)
-            {
+        sort_button_price.setOnClickListener {
+
+            //add fragment to fill sorting view
+            //supportFragmentManager.beginTransaction()
+            //    .add(R.id.SortingView, MainFragment.newInstance(), "hotelList").commit()
+
+
+            var hotelDummyListSorted = hotelDummyList.sortedBy { it.price }
+
+            SortingView.apply {
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                adapter = SortingViewAdapter(hotelDummyListSorted)
+            }
+
+            if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
                 SortingView.setVisibility(View.VISIBLE)
                 overViewVisible = false
-            }
-            else
-            {
+            } else {
                 OverView.setVisibility(View.VISIBLE)
                 SortingView.setVisibility(View.GONE)
                 overViewVisible = true
@@ -45,11 +68,14 @@ class MainActivity : AppCompatActivity() {
 
         OverView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = OverViewAdapter()
+            adapter = OverViewAdapter(hotelDummyList)
         }
+
 
         // Example of a call to a native method
         //sample_text.text = stringFromJNI()
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
