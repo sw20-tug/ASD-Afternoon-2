@@ -2,9 +2,9 @@ package com.example.asd.hotels
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
+import android.util.Log.d
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setSupportActionBar(toolbar)
+
         //setSupportActionBar(toolbar)
 
         val hotel_values = listOf(
@@ -98,16 +101,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    class Hotel(){
-//        var hotel_price;
-//    }
+    class Hotel(){
+        var hotel_price = 0;
+        var location_id = 0;
+    }
 
-//    public fun inPriceRange(var minPrice:Int, var maxPrice:Int, var hotel:Hotel):Boolean{
-//        if((hotel.hotel_price<=maxPrice) && (hotel.hotel_price>=minPrice))
-//            return true;
-//        else
-//            return false;
-//    }
+    fun inPriceRange(minPrice:Int, maxPrice:Int, hotel:Hotel):Boolean{
+        var statePriceR:Boolean = false;
+        if((hotel.hotel_price<=maxPrice) && (hotel.hotel_price>=minPrice))
+            statePriceR = true;
+        return statePriceR;
+    }
+    fun filterbyPrice(hotelsToFilter:MutableList<Hotel>){
+        hotelsToFilter.forEach { hotel_inList->
+            //minPrice, maxPrice form RangeSeekBar
+            if(!inPriceRange(0, 100, hotel_inList))
+                hotelsToFilter.remove(hotel_inList);
+        }
+    }
+
+    fun inLocation(location_id:Int, hotel:Hotel):Boolean{
+        var stateLocation:Boolean = false;
+        if(hotel.location_id== location_id)
+            stateLocation = true;
+        return stateLocation;
+    }
+    fun filterbyLocation(){
+
+    }
+
+
+
 
 
     /**

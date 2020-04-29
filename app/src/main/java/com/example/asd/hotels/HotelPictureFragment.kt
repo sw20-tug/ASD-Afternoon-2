@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+
+import kotlinx.android.synthetic.main.activity_hotel_detail.*
+import kotlinx.android.synthetic.main.hotel_detail.view.*
+
 import androidx.fragment.app.Fragment
 import com.example.asd.hotels.dummy.DummyContent
 import kotlinx.android.synthetic.main.fragment_hotel_picture.view.*
