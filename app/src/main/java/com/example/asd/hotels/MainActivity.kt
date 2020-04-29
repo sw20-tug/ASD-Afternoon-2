@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        //setSupportActionBar(toolbar)
 
         val hotel_values = listOf(
             HotelData(1, 1, "Graz", R.drawable.untitled, "Alpha", 3, 3,"Gutes Hotel!"),
