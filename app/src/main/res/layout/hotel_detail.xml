@@ -1,0 +1,14 @@
+<TextView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/hotel_detail_text"
+style="?android:attr/textAppearanceLarge"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:scrollbars="vertical"
+android:textIsSelectable="true"
+app:layout_constraintTop_toTopOf="parent"
+tools:layout_editor_absoluteX="36dp"
+tools:text="@tools:sample/lorem"
+tools:context=".HotelDetailFragment"/>
