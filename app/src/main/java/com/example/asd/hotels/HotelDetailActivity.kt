@@ -2,9 +2,11 @@ package com.example.asd.hotels
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.RatingBar
+import androidx.appcompat.app.AppCompatActivity
+import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
 
 /**
@@ -13,17 +15,19 @@ import kotlinx.android.synthetic.main.activity_hotel_detail.*
  * item details are presented side-by-side with a list of items
  * in a todo change to ListActivity [*].
  */
-class HotelDetailActivity : AppCompatActivity() {
+
+class HotelDetailActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel_detail)
         setSupportActionBar(detail_toolbar)
+        val hotelId=intent.getIntExtra("hotel_id", -1)
 
-        fab.setOnClickListener { view ->
+        /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-        }
+        }*/
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -56,12 +60,38 @@ class HotelDetailActivity : AppCompatActivity() {
                     )
                 }
             }
+            val comment_fragment = CommentListFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
             supportFragmentManager.beginTransaction()
                 .add(R.id.hotel_detail_container, hotel_detail_fragment)
                 .add(R.id.hotel_picture_container, hotel_picture_fragment)
+                .add(R.id.comment_list_container, comment_fragment)
                 .commit()
         }
+        initializeHotelInfos()
+        // add button and eventlistener
+        val ratingButton = findViewById<Button>(R.id.rating_button)
+        ratingButton.setOnClickListener{ view -> addRating() }
     }
+    fun initializeHotelInfos() {
+        // todo set to real name
+        supportActionBar?.title = "Test name";
+        val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
+        if (ratingBar != null) {
+            // todo set to rating saved in db
+            ratingBar.rating = 4.0F;
+        }
+    }
+
+    fun addRating() {
+        val id = intent.getIntExtra("hotel_id", -1)
+        val intent = Intent(this, HotelRatingActivity::class.java)
+        intent.putExtra("hotel_id", id)
+        startActivity(intent)
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {

@@ -27,10 +27,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HotelDetailActivity"
-            android:label="@string/title_hotel_detail"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"> <!-- todo change MainActivity to ListAcitvity -->
+
+            android:name=".HotelRatingActivity"
+            android:label="Hotel_Rating"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".HotelDetailActivity"
+                android:label="@string/title_hotel_detail"
+                android:parentActivityName=".MainActivity"
+                android:theme="@style/AppTheme.NoActionBar"><!-- todo change MainActivity to ListAcitvity-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.asd.hotels.MainActivity" /> <!-- todo change MainActivity to ListAcitvity -->
