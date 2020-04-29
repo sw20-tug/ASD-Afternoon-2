@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main_sorted.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,13 +23,43 @@ class MainActivity : AppCompatActivity() {
         //setSupportActionBar(toolbar)
 
         val hotel_values = listOf(
-            HotelData(1, 1, "Vienna", R.drawable.untitled,
-                "Sample Name", 500, 200,
-                "Test description for vienna"),
-            HotelData(2, 1, "Graz", R.drawable.untitled,
-                "Sample Name", 500, 200,
-                "Test description for Graz")
+            HotelData(1, 1, 1, "Beta", 1, 3, "1", 1),
+            HotelData(2, 2, 1, "Alpha", 1, 2, "1", 1),
+            HotelData(3, 1, 1, "Echo", 1, 7, "1", 1),
+            HotelData(4, 1, 1, "Oscar", 1, 14, "1", 1),
+            HotelData(5, 1, 1, "Sierra", 1, 9, "1", 1),
+            HotelData(6, 1, 1, "Golf", 1, 1, "1", 1),
+            HotelData(7, 1, 1, "Charlie", 1, 2, "1", 1),
+            HotelData(8, 1, 1, "Juliet", 1, 3, "1", 1),
+            HotelData(9, 1, 1, "Tango", 1, 4, "1", 1)
         )
+
+
+        var overViewVisible = true
+        sort_button_price.setOnClickListener {
+
+            //add fragment to fill sorting view
+            //supportFragmentManager.beginTransaction()
+            //    .add(R.id.SortingView, MainFragment.newInstance(), "hotelList").commit()
+
+
+            var hotelDummyListSorted = hotel_values.sortedBy { it.price }
+
+            SortingView.apply {
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                adapter = SortingViewAdapter(hotelDummyListSorted)
+            }
+
+            if (overViewVisible) {
+                OverView.setVisibility(View.INVISIBLE)
+                SortingView.setVisibility(View.VISIBLE)
+                overViewVisible = false
+            } else {
+                OverView.setVisibility(View.VISIBLE)
+                SortingView.setVisibility(View.GONE)
+                overViewVisible = true
+            }
+        }
 
         // Setting up the adapter
         OverView.apply {
@@ -76,6 +108,8 @@ class MainActivity : AppCompatActivity() {
 //        else
 //            return false;
 //    }
+
+    */
 
     /**
      * A native method that is implemented by the 'native-lib' native library,

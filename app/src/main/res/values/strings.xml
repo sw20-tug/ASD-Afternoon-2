@@ -4,6 +4,11 @@
     <string name="title_hotel_list">Hotels</string>
     <string name="title_hotel_detail">Hotel Detail</string>
 
+    <string name="sorting_text">sort by</string>
+    <string name="sorting_text_stars">stars</string>
+    <string name="sorting_text_rating">rating</string>
+    <string name="sorting_text_price">price</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="large_text">
