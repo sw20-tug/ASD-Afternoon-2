@@ -23,12 +23,14 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/toolbar">
+
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/detail_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
             <RatingBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/ratingBar"/>
@@ -46,7 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -56,4 +60,5 @@
             app:srcCompat="@android:drawable/stat_notify_chat"
             app:layout_anchor="@+id/hotel_detail_container"
             app:layout_anchorGravity="top|end"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
