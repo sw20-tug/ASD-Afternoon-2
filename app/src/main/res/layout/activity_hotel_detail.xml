@@ -84,5 +84,6 @@
             android:text="@string/addRating"
             android:translationZ="90dp"
             app:layout_anchor="@+id/hotel_detail_container"
+
             />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

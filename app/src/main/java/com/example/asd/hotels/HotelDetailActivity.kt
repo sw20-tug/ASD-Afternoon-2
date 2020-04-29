@@ -87,7 +87,7 @@ class HotelDetailActivity() : AppCompatActivity() {
 
     fun addRating() {
         val id = intent.getIntExtra("hotel_id", -1)
-        val intent = Intent(this, MainActivity::class.java) // todo change to RatingActivity
+        val intent = Intent(this, HotelRatingActivity::class.java)
         intent.putExtra("hotel_id", id)
         startActivity(intent)
     }
