@@ -35,7 +35,7 @@ class OverViewAdapter(
         holder.view.img_hotel.setImageDrawable(
             holder.view.context.getDrawable(hotel_detail.image)
         )
-        holder.view.ratingBar.rating = 1;
+        holder.view.overview_rating.rating = 1F;
         holder.view.txt_description.text = hotel_detail.hotel_description;
         holder.view.setOnClickListener {
             d("OverViewAdapter", "clicked!")
