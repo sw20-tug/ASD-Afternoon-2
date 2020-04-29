@@ -55,24 +55,6 @@
                 android:orientation="vertical"
                 android:id="@+id/hotel_detail_linear">
 
-<<<<<<< HEAD
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/hotel_detail_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v4.widget.NestedScrollView>
-
-    <android.support.v4.widget.NestedScrollView
-            android:id="@+id/hotel_picture_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </android.support.v4.widget.NestedScrollView>
-    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-=======
             <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,7 +77,6 @@
 
     <Button
             android:id="@+id/rating_button"
->>>>>>> 4fc456abfcd73076e25bb623c5950f065f6767e1
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
