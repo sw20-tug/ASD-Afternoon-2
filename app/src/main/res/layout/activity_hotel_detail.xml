@@ -23,42 +23,67 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/toolbar">
-
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/detail_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:navigationIcon="?attr/homeAsUpIndicator"/>
 
             <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/ratingBar"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:isIndicator="true"
+                    android:max="10"
+                    android:numStars="10"
+                    android:rating="0" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
-            android:id="@+id/hotel_detail_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </androidx.core.widget.NestedScrollView>
-    <androidx.core.widget.NestedScrollView
-            android:id="@+id/hotel_picture_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/hotel_detail_framecontainer">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/hotel_detail_linear">
 
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hotel_detail_container">
+
+            </FrameLayout>
+
+            <FrameLayout
+                    android:id="@+id/hotel_picture_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20" />
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comment_list_container"/>
+
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+    <Button
+            android:id="@+id/rating_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/stat_notify_chat"
+            app:layout_anchorGravity="top|end"
+            android:text="@string/addRating"
+            android:translationZ="90dp"
             app:layout_anchor="@+id/hotel_detail_container"
-            app:layout_anchorGravity="top|end"/>
 
+            />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
