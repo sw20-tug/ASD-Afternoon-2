@@ -23,15 +23,15 @@ class MainActivity : AppCompatActivity() {
         //setSupportActionBar(toolbar)
 
         val hotel_values = listOf(
-            HotelData(1, 1, 1, "Beta", 1, 3, "1", 1),
-            HotelData(2, 2, 1, "Alpha", 1, 2, "1", 1),
-            HotelData(3, 1, 1, "Echo", 1, 7, "1", 1),
-            HotelData(4, 1, 1, "Oscar", 1, 14, "1", 1),
-            HotelData(5, 1, 1, "Sierra", 1, 9, "1", 1),
-            HotelData(6, 1, 1, "Golf", 1, 1, "1", 1),
-            HotelData(7, 1, 1, "Charlie", 1, 2, "1", 1),
-            HotelData(8, 1, 1, "Juliet", 1, 3, "1", 1),
-            HotelData(9, 1, 1, "Tango", 1, 4, "1", 1)
+            HotelData(1, 1, "Graz", R.drawable.untitled, "Alpha", 3, 3,"Gutes Hotel!"),
+            HotelData(2, 2, "Graz", R.drawable.untitled, "Beta", 2, 2, "Gutes Hotel!"),
+            HotelData(3, 1, "Graz", R.drawable.untitled, "Charlie", 7, 7, "Gutes Hotel!"),
+            HotelData(4, 1, "Graz", R.drawable.untitled, "Delta", 14, 9, "Gutes Hotel!"),
+            HotelData(5, 1, "Graz", R.drawable.untitled, "Echo", 9, 12, "Gutes Hotel!"),
+            HotelData(6, 1, "Graz", R.drawable.untitled, "Foxtrot", 1, 1, "Gutes Hotel!"),
+            HotelData(7, 1, "Graz", R.drawable.untitled,  "Golf", 1, 2, "Gutes Hotel!"),
+            HotelData(8, 1, "Graz", R.drawable.untitled, "Hotel", 3, 3, "Gutes Hotel!"),
+            HotelData(9, 1, "Graz", R.drawable.untitled, "India", 4, 4, "Gutes Hotel!")
         )
 
 
@@ -109,7 +109,6 @@ class MainActivity : AppCompatActivity() {
 //            return false;
 //    }
 
-    */
 
     /**
      * A native method that is implemented by the 'native-lib' native library,

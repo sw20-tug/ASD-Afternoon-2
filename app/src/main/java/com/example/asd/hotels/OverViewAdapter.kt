@@ -32,8 +32,8 @@ class OverViewAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hotel_detail = hotel_details[position]
-        holder.view.txt_location.text = hotel_detail.location;
-        holder.view.txt_price.text = "€ " + hotel_detail.price.toString();
+        holder.view.txt_location.text = hotel_detail.hotel_name;
+        holder.view.txt_price.text = "€ " + hotel_detail.price.toString()
         holder.view.img_hotel.setImageDrawable(
             holder.view.context.getDrawable(hotel_detail.image)
         )
