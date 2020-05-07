@@ -8,6 +8,8 @@ data class HotelData (
     val hotel_name: String,
     val hotel_capacity: Int,
     val price: Int,
-    val hotel_description: String
+    val hotel_description: String,
+    val hotel_rating: Int,
+    val hotel_stars: Int
 )
 
