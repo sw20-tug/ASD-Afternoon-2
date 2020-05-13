@@ -44,7 +44,7 @@ class OverViewAdapter(
             // Callback to the MainActivity
             //overviewClicked.invoke()
             val detail_intent = Intent(view.context, HotelDetailActivity::class.java)
-            detail_intent.putExtra("hotel_id", hotel_detail.hotel_id);
+            detail_intent.putExtra("hotelData", hotel_detail)
             view.context.startActivity(detail_intent)
         }
     }

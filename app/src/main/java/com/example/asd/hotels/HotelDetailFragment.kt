@@ -7,6 +7,7 @@ import android.view.ViewGroup
 
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
 import kotlinx.android.synthetic.main.hotel_detail.view.*
@@ -23,7 +24,7 @@ class HotelDetailFragment : Fragment() {
     /**
      * The dummy content this fragment is presenting.
      */
-    private var item = null
+    private lateinit var hotelData: HotelData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +34,14 @@ class HotelDetailFragment : Fragment() {
                 // Load the  content specified by the fragment
                 //item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
             }
+            if (it.containsKey(ARG_ITEM)) {
+                // Load the  content specified by the fragment
+                val item = it.getParcelable<HotelData>(ARG_ITEM);
+                if (item != null) {
+                    hotelData = item
+                }
+            }
         }
-
     }
 
     override fun onCreateView(
@@ -42,7 +49,7 @@ class HotelDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.hotel_detail, container, false)
-        rootView.hotel_detail_text.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."//it.details
+        rootView.hotel_detail_text.text = hotelData.hotel_description//"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."//it.details
         return rootView
     }
 
@@ -52,5 +59,6 @@ class HotelDetailFragment : Fragment() {
          * represents.
          */
         const val ARG_ITEM_ID = "hotel_id"
+        const val ARG_ITEM = "hotelData"
     }
 }
