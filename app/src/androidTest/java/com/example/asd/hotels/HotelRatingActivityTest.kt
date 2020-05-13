@@ -36,4 +36,6 @@ class HotelRatingActivityTest {
             toPackage(PACKAGE_NAME),
             hasExtra("hotel_id", hotel_id)))
     }
+
+    //TODO super.onBackPressed() verwenden
 }
