@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SeekBarActivity">
+    tools:context=".HotelFilterActivity">
 
     <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
         android:id="@+id/prange_seekbar"
