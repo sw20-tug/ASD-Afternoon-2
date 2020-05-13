@@ -24,72 +24,71 @@ class MainActivity : AppCompatActivity() {
 
         val hotelValues = mutableListOf<HotelData>();
         var idCounter = 0
-        var hotelNames = listOf("Alpha", "Beta", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India")
+        var hotelNames =
+            listOf("Alpha", "Beta", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India")
         for (i in 0..10) {
-            hotelValues.add(HotelData(idCounter, 1, "Graz", R.drawable.untitled, hotelNames.get((0..9).random()), (0..100).random(), (0..100).random(), "Gutes Hotel!", (0..10).random(), (1..5).random()))
+            hotelValues.add(
+                HotelData(
+                    idCounter,
+                    1,
+                    "Graz",
+                    R.drawable.untitled,
+                    hotelNames.get((0..8).random()),
+                    (0..100).random(),
+                    (0..100).random(),
+                    "Gutes Hotel!",
+                    (0..10).random(),
+                    (1..5).random()
+                )
+            )
             idCounter++
         }
 
 
         var overViewVisible = true
         sort_button_price.setOnClickListener {
-            //add fragment to fill sorting view
-            //supportFragmentManager.beginTransaction()
-            //    .add(R.id.SortingView, MainFragment.newInstance(), "hotelList").commit()
-
-            var hotelDummyListSorted = hotelValues.sortedBy { it.price }
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelDummyListSorted)
+                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.PRICE)
             }
-            if (overViewVisible) {
+            overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
                 SortingView.setVisibility(View.VISIBLE)
-                overViewVisible = false
+                false
             } else {
                 OverView.setVisibility(View.VISIBLE)
                 SortingView.setVisibility(View.GONE)
-                overViewVisible = true
+                true
             }
         }
         sort_button_rating.setOnClickListener {
-            //add fragment to fill sorting view
-            //supportFragmentManager.beginTransaction()
-            //    .add(R.id.SortingView, MainFragment.newInstance(), "hotelList").commit()
-
-            var hotelDummyListSorted = hotelValues.sortedBy { it.hotel_rating }
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelDummyListSorted)
+                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.RATING)
             }
-            if (overViewVisible) {
+            overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
                 SortingView.setVisibility(View.VISIBLE)
-                overViewVisible = false
+                false
             } else {
                 OverView.setVisibility(View.VISIBLE)
                 SortingView.setVisibility(View.GONE)
-                overViewVisible = true
+                true
             }
         }
         sort_button_stars.setOnClickListener {
-            //add fragment to fill sorting view
-            //supportFragmentManager.beginTransaction()
-            //    .add(R.id.SortingView, MainFragment.newInstance(), "hotelList").commit()
-
-            var hotelDummyListSorted = hotelValues.sortedBy { it.hotel_stars }
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelDummyListSorted)
+                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.RATING)
             }
-            if (overViewVisible) {
+            overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
                 SortingView.setVisibility(View.VISIBLE)
-                overViewVisible = false
+                false
             } else {
                 OverView.setVisibility(View.VISIBLE)
                 SortingView.setVisibility(View.GONE)
-                overViewVisible = true
+                true
             }
         }
 
@@ -135,37 +134,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class Hotel(){
+    class Hotel() {
         var hotel_price = 0;
         var location_id = 0;
     }
 
-    fun inPriceRange(minPrice:Int, maxPrice:Int, hotel:Hotel):Boolean{
-        var statePriceR:Boolean = false;
-        if((hotel.hotel_price<=maxPrice) && (hotel.hotel_price>=minPrice))
+    fun inPriceRange(minPrice: Int, maxPrice: Int, hotel: Hotel): Boolean {
+        var statePriceR: Boolean = false;
+        if ((hotel.hotel_price <= maxPrice) && (hotel.hotel_price >= minPrice))
             statePriceR = true;
         return statePriceR;
     }
-    fun filterbyPrice(hotelsToFilter:MutableList<Hotel>){
-        hotelsToFilter.forEach { hotel_inList->
+
+    fun filterbyPrice(hotelsToFilter: MutableList<Hotel>) {
+        hotelsToFilter.forEach { hotel_inList ->
             //minPrice, maxPrice form RangeSeekBar
-            if(!inPriceRange(0, 100, hotel_inList))
+            if (!inPriceRange(0, 100, hotel_inList))
                 hotelsToFilter.remove(hotel_inList);
         }
     }
 
-    fun inLocation(location_id:Int, hotel:Hotel):Boolean{
-        var stateLocation:Boolean = false;
-        if(hotel.location_id== location_id)
+    fun inLocation(location_id: Int, hotel: Hotel): Boolean {
+        var stateLocation: Boolean = false;
+        if (hotel.location_id == location_id)
             stateLocation = true;
         return stateLocation;
     }
-    fun filterbyLocation(){
+
+    fun filterbyLocation() {
 
     }
-
-
-
 
 
     /**
