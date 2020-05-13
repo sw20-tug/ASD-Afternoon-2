@@ -17,7 +17,6 @@ import org.junit.runner.RunWith
 
 private const val PACKAGE_NAME = "com.example.asd.hotels"
 
-private const val PACKAGE_NAME = "com.example.asd.hotels"
 
 
 @RunWith(AndroidJUnit4::class)
