@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HotelFilterActivity">
+
+    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+        android:id="@+id/prange_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:corner_radius="10"
+        app:min_value="0"
+        app:max_value="1000"
+        app:gap="10"
+        app:steps="1"
+        app:bar_color="#000000"
+        app:bar_highlight_color="#000000"
+        app:left_thumb_color="#0039FF"
+        app:left_thumb_color_pressed="#2196F3"
+        app:right_thumb_color="#0039FF"
+        app:right_thumb_color_pressed="#03A9F4"
+        app:data_type="_integer"/>
+
+    <TextView
+        android:id="@+id/price_range"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="0-100"
+        android:textSize="24sp" />
+
+
+</LinearLayout>
