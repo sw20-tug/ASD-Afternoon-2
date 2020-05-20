@@ -44,8 +44,10 @@ class HotelDetailActivity(): AppCompatActivity() {
             }
             val hotel_picture_fragment = HotelPictureFragment().apply {
                 arguments = Bundle().apply {
+                    putParcelable(HotelPictureFragment.ARG_ITEM,
+                        hotelData)
                     putInt(
-                        HotelDetailFragment.ARG_ITEM_ID,
+                        HotelPictureFragment.ARG_ITEM_ID,
                         hotelData.hotel_id
                     )
                 }

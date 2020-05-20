@@ -1,17 +1,17 @@
 package com.example.asd.hotels
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 
-import kotlinx.android.synthetic.main.activity_hotel_detail.*
-import kotlinx.android.synthetic.main.hotel_detail.view.*
-
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_hotel_picture.view.*
-import kotlinx.android.synthetic.main.hotel_layout.view.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.asd.hotels.dummy.HotelData
+import kotlinx.android.synthetic.main.fragment_hotel_picture.*
 
 /**
  * A fragment representing a single Hotel detail screen.
@@ -20,37 +20,46 @@ import kotlinx.android.synthetic.main.hotel_layout.view.*
  * on handsets.
  */
 class HotelPictureFragment : Fragment() {
-
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private var item = null
-
+    private lateinit var hotelData: HotelData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            if (it.containsKey(ARG_ITEM_ID)) {
-                // Load the content specified by the fragment
-                //item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
+            if (it.containsKey(HotelPictureFragment.ARG_ITEM)) {
+                // Load the  content specified by the fragment
+                val item = it.getParcelable<HotelData>(HotelPictureFragment.ARG_ITEM);
+                if (item != null) {
+                    hotelData = item
+                }
             }
         }
-    }
 
+
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_hotel_picture, container, false)
-
-        // Show the dummy content as text in a TextView.
-        item?.let {
-            rootView.hotel_picture_text.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."//it.details
+        // get pictures
+        var images =
+            listOf(R.drawable.untitled,  R.drawable.untitled,  R.drawable.untitled)
+        // Setting up the adapter
+        val photoview = rootView.findViewById(R.id.PhotoView) as RecyclerView
+        photoview.layoutManager = LinearLayoutManager(activity)
+        photoview.adapter =  PhotoViewAdapter(images) {
+                // Call the detail view.
+                startActivity(
+                    Intent(
+                        this@HotelPictureFragment.context,
+                        HotelDetailActivity::class.java
+                    )
+                )
         }
-        rootView.hotel_picture_text.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."//it.details
-
         return rootView
     }
+
 
     companion object {
         /**
@@ -58,5 +67,6 @@ class HotelPictureFragment : Fragment() {
          * represents.
          */
         const val ARG_ITEM_ID = "hotel_id"
+        const val ARG_ITEM = "hotelData"
     }
 }
