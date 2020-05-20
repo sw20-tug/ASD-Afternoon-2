@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-
 import kotlinx.android.synthetic.main.activity_hotel_detail.*
 import kotlinx.android.synthetic.main.hotel_detail.view.*
 
@@ -57,6 +56,6 @@ class HotelPictureFragment : Fragment() {
          * The fragment argument representing the item ID that this fragment
          * represents.
          */
-        const val ARG_ITEM_ID = "item_id"
+        const val ARG_ITEM_ID = "hotel_id"
     }
 }

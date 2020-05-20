@@ -1,5 +1,9 @@
 package com.example.asd.hotels.dummy
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class HotelData (
     var hotel_id: Int,
     var category: Int,
@@ -8,6 +12,8 @@ data class HotelData (
     var hotel_name: String,
     var hotel_capacity: Int,
     var price: Int,
-    var hotel_description: String
-)
+    var hotel_description: String,
+    var hotel_rating: Int,
+    var hotel_stars: Int
+) : Parcelable
 

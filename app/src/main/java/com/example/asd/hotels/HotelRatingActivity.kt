@@ -12,27 +12,34 @@ class HotelRatingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel_rating)
+        val hotelId=intent.getIntExtra("hotel_id", -1)
 
         val done = findViewById<Button>(R.id.button_done)
         val dismiss = findViewById<Button>(R.id.button_dismiss)
         val rating_bar = findViewById<RatingBar>(R.id.rate_hotel)
 
         //Button done clicked:
-        done.setOnClickListener {
-            //new comment in DB erstellen -> comment abspeichern
+        done.setOnClickListener {view -> doneWithRating() }
 
-            //rating abspeichern und gesamtbewertung neu berechnen
+        //Button dismiss clicked
+        dismiss.setOnClickListener {view -> dismissView()}
+    }
 
-            //zurück zum detailview gehen
-            val intent = Intent(this, HotelDetailActivity::class.java)
-            startActivity(intent)
-        }
+    fun doneWithRating(){
+        //new comment in DB erstellen -> comment abspeichern
 
-        dismiss.setOnClickListener {
-            //zurück zum detailview gehen
-            val intent = Intent(this, HotelDetailActivity::class.java)
-            startActivity(intent)
-        }
+        //rating abspeichern und gesamtbewertung neu berechnen
 
+        //zurück zum detailview gehen
+        val intent = Intent(this, HotelDetailActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun dismissView() {
+        //zurück zum detailview gehen
+        val id = intent.getIntExtra("hotel_id", -1)
+        val intent = Intent(this, HotelDetailActivity::class.java)
+        intent.putExtra("hotel_id", id)
+        startActivity(intent)
     }
 }

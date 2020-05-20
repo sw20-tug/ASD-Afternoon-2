@@ -156,7 +156,7 @@ class DatabaseProvider(context: Context) {
             null
         )
 
-        val returnVal = HotelData(0, 0, "", 0, "", 0, 0, "")
+        val returnVal = HotelData(0, 0, "", 0, "", 0, 0, "", 0 , 0)
         with(cursor) {
             while (moveToNext()) {
                 returnVal.hotel_id = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_ID_COLUMN))

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import com.example.asd.hotels.dummy.HotelData
+import kotlinx.android.synthetic.main.activity_hotel_detail.view.*
 import kotlinx.android.synthetic.main.hotel_layout.view.*
 
 class OverViewAdapter(
@@ -42,7 +44,7 @@ class OverViewAdapter(
             // Callback to the MainActivity
             //overviewClicked.invoke()
             val detail_intent = Intent(view.context, HotelDetailActivity::class.java)
-            detail_intent.putExtra("hotel_id", hotel_detail.hotel_id);
+            detail_intent.putExtra("hotelData", hotel_detail)
             view.context.startActivity(detail_intent)
         }
     }
