@@ -31,15 +31,13 @@ class HotelRatingActivity : AppCompatActivity() {
         //rating abspeichern und gesamtbewertung neu berechnen
 
         //zurück zum detailview gehen
-        val intent = Intent(this, HotelDetailActivity::class.java)
-        startActivity(intent)
+        finish();
+        super.onBackPressed();
     }
 
     fun dismissView() {
         //zurück zum detailview gehen
-        val id = intent.getIntExtra("hotel_id", -1)
-        val intent = Intent(this, HotelDetailActivity::class.java)
-        intent.putExtra("hotel_id", id)
-        startActivity(intent)
+        finish();
+        super.onBackPressed();
     }
 }
