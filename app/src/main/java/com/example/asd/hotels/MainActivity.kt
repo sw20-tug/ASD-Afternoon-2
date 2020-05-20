@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asd.hotels.dummy.HotelData
+import com.example.asd.hotels.provider.DatabaseProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main_sorted.*
+import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,27 +25,38 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val hotelValues = mutableListOf<HotelData>();
-        var idCounter = 0
-        var hotelNames =
-            listOf("Alpha", "Beta", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India")
-        for (i in 0..10) {
-            hotelValues.add(
-                HotelData(
-                    idCounter,
-                    1,
-                    "Graz",
-                    R.drawable.untitled,
-                    hotelNames.get((0..8).random()),
-                    (0..100).random(),
-                    (0..100).random(),
-                    "Gutes Hotel!",
-                    (0..10).random(),
-                    (1..5).random()
-                )
-            )
-            idCounter++
-        }
 
+        try {
+            val connectMySql = DatabaseProvider(this)
+
+            connectMySql.insert_location("Alpha")
+            connectMySql.insert_location("Beta")
+            connectMySql.insert_location("Charlie")
+            connectMySql.insert_location("Delta")
+            connectMySql.insert_location("Echo")
+            connectMySql.insert_location("Foxtrot")
+            connectMySql.insert_location("Golf")
+            connectMySql.insert_location("Hotel")
+            connectMySql.insert_location("India")
+
+            for (x in 0 until 10) {
+                connectMySql.insert_category("Test")
+                connectMySql.insert_photo(R.drawable.untitled)
+            }
+
+            for (x in 0 until 10) {
+                connectMySql.insert_hotel(
+                    1, x + 1, "Sample_name", Random.nextInt(1, 100),
+                    Random.nextInt(1, 100), "Gutes Hotel!", x + 1
+                )
+            }
+
+            for(x in 1 until 11){
+                hotelValues.add(connectMySql.get_hotels(x))
+            }
+        } catch (e: Exception) {
+            d("MainActivity Db error", e.message)
+        }
 
         var overViewVisible = true
         sort_button_price.setOnClickListener {
@@ -180,3 +193,4 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 }
+
