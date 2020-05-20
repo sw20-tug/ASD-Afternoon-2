@@ -39,7 +39,7 @@ class SortingViewAdapter(
             // Callback to the MainActivity
             //overviewClicked.invoke()
             val detail_intent = Intent(view.context, HotelDetailActivity::class.java)
-            detail_intent.putExtra("hotel_id", hotelDetail.hotel_id)
+            detail_intent.putExtra("hotelData", hotelDetail)
             view.context.startActivity(detail_intent)
         }
     }
