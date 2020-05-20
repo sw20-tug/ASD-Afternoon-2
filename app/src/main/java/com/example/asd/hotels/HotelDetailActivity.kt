@@ -71,6 +71,10 @@ class HotelDetailActivity(): AppCompatActivity() {
     }
     fun initializeHotelInfos() {
         supportActionBar?.title = hotelData.hotel_name
+        val hotelStars: RatingBar = findViewById<RatingBar>(R.id.hotelStars)
+        if (hotelStars != null) {
+            hotelStars.rating = (hotelData.hotel_stars).toFloat();
+        }
         val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
         if (ratingBar != null) {
             ratingBar.rating = (hotelData.hotel_rating).toFloat();
