@@ -2,9 +2,9 @@ package com.example.asd.hotels
 
 import android.content.Intent
 import android.os.Bundle
+
 import android.view.Menu
 import android.view.MenuItem
-import android.util.Log.d
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,7 +13,11 @@ import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main_sorted.*
-
+import android.util.Log.d
+import com.example.asd.hotels.provider.DatabaseProvider
+import kotlinx.android.synthetic.main.fragment_comment.*
+import java.lang.Exception
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,18 +27,52 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        var h =  HotelData(0, 0, "", 0, "", 0, 0, "")
 
-        val hotel_values = listOf(
-            HotelData(1, 1, "Graz", R.drawable.untitled, "Alpha", 3, 3,"Gutes Hotel!"),
-            HotelData(2, 2, "Graz", R.drawable.untitled, "Beta", 2, 2, "Gutes Hotel!"),
-            HotelData(3, 1, "Graz", R.drawable.untitled, "Charlie", 7, 7, "Gutes Hotel!"),
-            HotelData(4, 1, "Graz", R.drawable.untitled, "Delta", 14, 9, "Gutes Hotel!"),
-            HotelData(5, 1, "Graz", R.drawable.untitled, "Echo", 9, 12, "Gutes Hotel!"),
-            HotelData(6, 1, "Graz", R.drawable.untitled, "Foxtrot", 1, 1, "Gutes Hotel!"),
-            HotelData(7, 1, "Graz", R.drawable.untitled,  "Golf", 1, 2, "Gutes Hotel!"),
-            HotelData(8, 1, "Graz", R.drawable.untitled, "Hotel", 3, 3, "Gutes Hotel!"),
-            HotelData(9, 1, "Graz", R.drawable.untitled, "India", 4, 4, "Gutes Hotel!")
-        )
+        try {
+            val connectMySql = DatabaseProvider(this)
+
+            connectMySql.insert_location("Alpha")
+            connectMySql.insert_location("Beta")
+            connectMySql.insert_location("Charlie")
+            connectMySql.insert_location("Delta")
+            connectMySql.insert_location("Echo")
+            connectMySql.insert_location("Foxtrot")
+            connectMySql.insert_location("Golf")
+            connectMySql.insert_location("Hotel")
+            connectMySql.insert_location("India")
+
+            for (x in 0 until 10) {
+                connectMySql.insert_category("Test")
+                connectMySql.insert_photo(R.drawable.untitled)
+            }
+
+            for (x in 0 until 10) {
+                connectMySql.insert_hotel(
+                    1, x + 1, "Sample_name", Random.nextInt(1, 100),
+                    Random.nextInt(1, 100), "Gutes Hotel!", x + 1
+                )
+            }
+
+            h = connectMySql.get_hotels(1)
+        } catch (e: Exception) {
+            d("MainActivity Db error", e.message)
+        }
+
+        val hotel_values = listOf(h)
+
+
+//        val hotel_values = listOf(
+//            HotelData(1, 1, "Graz", R.drawable.untitled, "Alpha", 3, 3, "Gutes Hotel!"),
+//            HotelData(2, 2, "Graz", R.drawable.untitled, "Beta", 2, 2, "Gutes Hotel!"),
+//            HotelData(3, 1, "Graz", R.drawable.untitled, "Charlie", 7, 7, "Gutes Hotel!"),
+//            HotelData(4, 1, "Graz", R.drawable.untitled, "Delta", 14, 9, "Gutes Hotel!"),
+//            HotelData(5, 1, "Graz", R.drawable.untitled, "Echo", 9, 12, "Gutes Hotel!"),
+//            HotelData(6, 1, "Graz", R.drawable.untitled, "Foxtrot", 1, 1, "Gutes Hotel!"),
+//            HotelData(7, 1, "Graz", R.drawable.untitled, "Golf", 1, 2, "Gutes Hotel!"),
+//            HotelData(8, 1, "Graz", R.drawable.untitled, "Hotel", 3, 3, "Gutes Hotel!"),
+//            HotelData(9, 1, "Graz", R.drawable.untitled, "India", 4, 4, "Gutes Hotel!")
+//        )
 
 
         var overViewVisible = true
@@ -45,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             //    .add(R.id.SortingView, MainFragment.newInstance(), "hotelList").commit()
 
 
-            var hotelDummyListSorted = hotel_values.sortedBy { it.price }
+            val hotelDummyListSorted = hotel_values.sortedBy { it.price }
 
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
@@ -69,10 +107,14 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             // Pass the list into OverViewAdapter
             adapter = OverViewAdapter(hotel_values) {
-                d("MainActivity","Hi from main")
+                d("MainActivity", "Hi from main")
                 // Call the detail view.
-                startActivity(Intent(this@MainActivity,
-                    HotelDetailActivity::class.java))
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        HotelDetailActivity::class.java
+                    )
+                )
             }
         }
 
@@ -100,37 +142,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class Hotel(){
+    class Hotel() {
         var hotel_price = 0;
         var location_id = 0;
     }
 
-    fun inPriceRange(minPrice:Int, maxPrice:Int, hotel:Hotel):Boolean{
-        var statePriceR:Boolean = false;
-        if((hotel.hotel_price<=maxPrice) && (hotel.hotel_price>=minPrice))
+    fun inPriceRange(minPrice: Int, maxPrice: Int, hotel: Hotel): Boolean {
+        var statePriceR: Boolean = false;
+        if ((hotel.hotel_price <= maxPrice) && (hotel.hotel_price >= minPrice))
             statePriceR = true;
         return statePriceR;
     }
-    fun filterbyPrice(hotelsToFilter:MutableList<Hotel>){
-        hotelsToFilter.forEach { hotel_inList->
+
+    fun filterbyPrice(hotelsToFilter: MutableList<Hotel>) {
+        hotelsToFilter.forEach { hotel_inList ->
             //minPrice, maxPrice form RangeSeekBar
-            if(!inPriceRange(0, 100, hotel_inList))
+            if (!inPriceRange(0, 100, hotel_inList))
                 hotelsToFilter.remove(hotel_inList);
         }
     }
 
-    fun inLocation(location_id:Int, hotel:Hotel):Boolean{
-        var stateLocation:Boolean = false;
-        if(hotel.location_id== location_id)
+    fun inLocation(location_id: Int, hotel: Hotel): Boolean {
+        var stateLocation: Boolean = false;
+        if (hotel.location_id == location_id)
             stateLocation = true;
         return stateLocation;
     }
-    fun filterbyLocation(){
+
+    fun filterbyLocation() {
 
     }
-
-
-
 
 
     /**

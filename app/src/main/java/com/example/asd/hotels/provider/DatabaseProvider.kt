@@ -1,19 +1,27 @@
 package com.example.asd.hotels.provider
 
-import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.asd.hotels.DB_TABLE.DBName
+import com.example.asd.hotels.dummy.HotelData
 
 class hotelReaderDbHelper(context: Context) : SQLiteOpenHelper(
-    context, DBName.LOCATION_TABLE_NAME, null, DBName.DATABASE_VERSION
+    context, DBName.DATABASE_NAME, null, DBName.DATABASE_VERSION
 ) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(DBName.SQL_DELETE_ENTRIES)
-        db.execSQL(DBName.CREATE_ALL_TABLES)
+        db.execSQL(DBName.CREATE_LOCATION_TABLE)
+        db.execSQL(DBName.CREATE_ACTIVITY_AVAILABILITY_TABLE)
+        db.execSQL(DBName.CREATE_ACTIVITY_TABLE)
+        db.execSQL(DBName.CREATE_CATEGORY_TABLE)
+        db.execSQL(DBName.CREATE_CUSTOMER_TABLE)
+        db.execSQL(DBName.CREATE_HOTEL_TABLE)
+        db.execSQL(DBName.CREATE_PHOTOGALLERY_TABLE)
+        db.execSQL(DBName.CREATE_RATING_TABLE)
+        db.execSQL(DBName.CREATE_USER_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -29,21 +37,13 @@ class hotelReaderDbHelper(context: Context) : SQLiteOpenHelper(
 
     companion object {
         // If you change the database schema, you must increment the database version.
-        const val DATABASE_VERSION = 2
+        const val DATABASE_VERSION = 3
         const val DATABASE_NAME = DBName.DATABASE_NAME
     }
 }
 
 class DatabaseProvider(context: Context) {
     val dbHelper = hotelReaderDbHelper(context)
-
-
-    fun cleanUp()
-    {
-        val db = dbHelper.writableDatabase
-        db.execSQL(DBName.SQL_DELETE_ENTRIES)
-        db.execSQL(DBName.CREATE_ALL_TABLES)
-    }
 
     fun insert_location(location_name: String): Long? {
         val db = dbHelper.writableDatabase
@@ -97,83 +97,82 @@ class DatabaseProvider(context: Context) {
         val newRowId = db?.insert(DBName.HOTEL_TABLE_NAME, null, values)
     }
 
-    fun get_location(): MutableList<String> {
+    fun get_location(id: Int): String {
         val db = dbHelper.readableDatabase
 
+        // See: https://developer.android.com/training/data-storage/sqlite
         val cursor = db.query(
             DBName.LOCATION_TABLE_NAME,
             null,
-            null,
-            null,
+            "${DBName.HOTEL_LOCATION_ID_COLUMN} = ?",
+            arrayOf(id.toString()),
             null,
             null,
             null
         )
-
-        val itemIds = mutableListOf<String>()
+        var retVal = ""
         with(cursor) {
             while (moveToNext()) {
-                val itemId = getString(getColumnIndexOrThrow(DBName.HOTEL_LOCATION_NAME_COLUMN))
-                itemIds.add(itemId)
+                retVal = getString(getColumnIndexOrThrow(DBName.HOTEL_LOCATION_NAME_COLUMN))
             }
         }
 
-        return itemIds
+        return retVal
     }
 
-    fun get_photo(): MutableList<String> {
+    fun get_photo(id: Int): Int {
         val db = dbHelper.readableDatabase
 
         val cursor = db.query(
             DBName.PHOTOGALLERY_TABLE_NAME,
             null,
-            null,
-            null,
+            "${DBName.HOTEL_PHOTOGALLERY_ID_COLUMN} = ?",
+            arrayOf(id.toString()),
             null,
             null,
             null
         )
 
-        val itemIds = mutableListOf<String>()
+        var retVal = 0
         with(cursor) {
             while (moveToNext()) {
-                val itemId = getString(getColumnIndexOrThrow(DBName.HOTEL_PHOTOGALLERY_DIRECTION_COLUMN))
-                itemIds.add(itemId)
+                    retVal = getInt(getColumnIndexOrThrow(DBName.HOTEL_PHOTOGALLERY_DIRECTION_COLUMN))
             }
         }
 
-        return itemIds
+        return retVal
     }
 
-    fun get_hotels(): MutableList<MutableList<String>> {
+    fun get_hotels(id: Int): HotelData {
         val db = dbHelper.readableDatabase
 
         val cursor = db.query(
             DBName.HOTEL_TABLE_NAME,
             null,
-            null,
-            null,
+            "${DBName.HOTEL_ID_COLUMN} = ?",
+            arrayOf(id.toString()),
             null,
             null,
             null
         )
 
-        val itemIds = mutableListOf<kotlin.collections.MutableList<String>>()
+        val returnVal = HotelData(0, 0, "", 0, "", 0, 0, "")
         with(cursor) {
             while (moveToNext()) {
-                val itemId =mutableListOf<String>()
-                itemId.add(getString(getColumnIndexOrThrow(DBName.HOTEL_CATEGORY_ID_COLUMN)))
-                itemId.add(getString(getColumnIndexOrThrow(DBName.HOTEL_LOCATION_ID_COLUMN)))
-                itemId.add(getString(getColumnIndexOrThrow(DBName.HOTEL_NAME_COLUMN)))
-                itemId.add(getString(getColumnIndexOrThrow(DBName.HOTEL_CAPACITY_COLUMN)))
-                itemId.add(getString(getColumnIndexOrThrow(DBName.HOTEL_PRICE_COLUMN)))
-                itemId.add(getString(getColumnIndexOrThrow(DBName.HOTEL_DESCRIPTION_COLUMN)))
-                itemId.add(getString(getColumnIndexOrThrow(DBName.HOTEL_PHOTOGALLERY_ID_COLUMN)))
-                itemIds.add(itemId.toMutableList())
+                returnVal.hotel_id = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_ID_COLUMN))
+                returnVal.category = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_CATEGORY_ID_COLUMN))
+                val loc_id = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_LOCATION_ID_COLUMN))
+                returnVal.location = get_location(loc_id)
+                val image_id = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_PHOTOGALLERY_ID_COLUMN))
+                returnVal.image = get_photo(image_id)
+                returnVal.hotel_name = cursor.getString(cursor.getColumnIndex(DBName.HOTEL_NAME_COLUMN))
+                returnVal.hotel_capacity = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_CAPACITY_COLUMN))
+                returnVal.price = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_PRICE_COLUMN))
+                returnVal.hotel_description = cursor.getString(cursor.getColumnIndex(DBName.HOTEL_DESCRIPTION_COLUMN))
             }
         }
 
-        return itemIds
+        return returnVal
     }
 
 }

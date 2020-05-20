@@ -39,7 +39,6 @@ object DBName {
     const val HOTEL_USER_PASSW_COLUMN = "user_password"
     const val HOTEL_USER_ADMIN_COLUMN = "user_isadmin"
 
-
     const val HOTEL_ACTIVITY_ID_COLUMN = "activity_id"
     const val HOTEL_ACTIVITY_NAME_COLUMN = "activity_name"
 
