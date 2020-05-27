@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RatingBar
+import android.widget.TextView
 import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.activity_hotel_rating.*
 import kotlinx.android.synthetic.main.hotel_detail.*
@@ -20,7 +21,7 @@ class HotelRatingActivity : AppCompatActivity() {
 
         val done = findViewById<Button>(R.id.button_done)
         val dismiss = findViewById<Button>(R.id.button_dismiss)
-        val rating_bar = findViewById<RatingBar>(R.id.rate_hotel)
+        val naming = findViewById<TextView>(R.id.hotel_name)
 
         //Button done clicked:
         done.setOnClickListener {view -> doneWithRating() }
@@ -29,27 +30,18 @@ class HotelRatingActivity : AppCompatActivity() {
         dismiss.setOnClickListener {view -> dismissView()}
 
         if (savedInstanceState == null) {
-            val hotel_rating_fragment = HotelRatingFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(HotelRatingFragment.ARG_ITEM, hotelData)
-                    putInt(
-                        HotelDetailFragment.ARG_ITEM_ID,
-                        hotelData.hotel_id
-                    )
-                }
-            }
-            supportFragmentManager.beginTransaction()
-                .add(R.id.hotel_picture_container_ratingview, hotel_rating_fragment)
-                .commit()
+            naming.text = hotelData.hotel_name
         }
     }
 
 
 
     fun doneWithRating(){
-        //new comment in DB erstellen -> comment abspeichern
 
-        //rating abspeichern und gesamtbewertung neu berechnen
+        val barRating = findViewById<RatingBar>(R.id.rate_hotel).numStars
+        val oldRating = hotelData.hotel_rating
+        val newRating = (barRating + oldRating) / 2
+        hotelData.hotel_rating = newRating
 
         //zurück zum detailview gehen
         super.onBackPressed();

@@ -26,7 +26,7 @@ private const val PACKAGE_NAME = "com.example.asd.hotels"
 
 @RunWith(AndroidJUnit4::class)
 class HotelDetailActivityTest {
-    var hotelData: HotelData = HotelData(1, 2, "there",  R.drawable.untitled, "Hotel SUPER", 200, 20, "Nice hotel", 5, 4)
+    var hotelData: HotelData = HotelData(1, 2, "there",  R.drawable.untitled, "Hotel SUPER", 200, 20, "Nice hotel", 5.0F, 4)
 
     @get:Rule
     val mActivityTestRule: IntentsTestRule<HotelDetailActivity> =
