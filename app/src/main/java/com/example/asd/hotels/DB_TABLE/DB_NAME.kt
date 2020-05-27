@@ -1,7 +1,6 @@
 package com.example.asd.hotels.DB_TABLE
 
 object DBName {
-
     const val DATABASE_NAME: String = "ASD_HOTELS.db"
     const val HOTEL_TABLE_NAME: String = "hotel"
     const val CUSTOMER_TABLE_NAME: String = "customer"
@@ -19,6 +18,8 @@ object DBName {
     const val HOTEL_CAPACITY_COLUMN = "hotel_capacity"
     const val HOTEL_PRICE_COLUMN = "hotel_price"
     const val HOTEL_DESCRIPTION_COLUMN = "hotel_description"
+    const val HOTEL_RATING_COLUMN = "hotel_rating"
+    const val HOTEL_STARS_COLUMN = "hotel_stars"
 
     const val HOTEL_CATEGORY_ID_COLUMN = "category_id"
     const val HOTEL_CATEGORY_NAME_COLUMN = "category_name"
@@ -54,6 +55,8 @@ object DBName {
             "$HOTEL_CAPACITY_COLUMN INTEGER NOT NULL," +
             "$HOTEL_PRICE_COLUMN INTEGER NOT NULL, " +
             "$HOTEL_DESCRIPTION_COLUMN TEXT NOT NULL, " +
+            "$HOTEL_RATING_COLUMN REAL NOT NULL," +
+            "$HOTEL_STARS_COLUMN INT NOT NULL," +
             "$HOTEL_PHOTOGALLERY_ID_COLUMN INTEGER, " +
             " FOREIGN KEY ($HOTEL_CATEGORY_ID_COLUMN) REFERENCES $CATEGORY_TABLE_NAME" +
             "($HOTEL_CATEGORY_ID_COLUMN), " +

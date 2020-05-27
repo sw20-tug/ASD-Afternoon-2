@@ -32,7 +32,8 @@ class SortingViewAdapter(
         holder.view.img_hotel.setImageDrawable(
             holder.view.context.getDrawable(hotelDetail.image)
         )
-        holder.view.overview_rating.rating = 1.0F;
+        holder.view.ratingRatingBar.rating = hotelDetail.hotel_rating
+        holder.view.starsRatingBar.rating = hotelDetail.hotel_stars.toFloat()
         holder.view.txt_description.text = hotelDetail.hotel_description;
         holder.view.setOnClickListener { view ->
             Log.d("OverViewAdapter", "clicked!")
@@ -47,8 +48,9 @@ class SortingViewAdapter(
     fun sortData(hotelValues: MutableList<HotelData>): List<HotelData> {
         return when (sortByValue) {
             SortEnum.PRICE -> hotelValues.sortedBy { it.price }
-            SortEnum.RATING -> hotelValues.sortedBy { it.hotel_rating }
-            SortEnum.STARS -> hotelValues.sortedBy { it.hotel_stars }
+            SortEnum.RATING -> hotelValues.sortedByDescending { it.hotel_rating }
+            SortEnum.STARS -> hotelValues.sortedByDescending { it.hotel_stars }
+            SortEnum.UNSORTED -> hotelValues
         }
     }
 
@@ -62,7 +64,7 @@ class SortingViewAdapter(
 
 
     enum class SortEnum {
-        PRICE, RATING, STARS
+        PRICE, RATING, STARS, UNSORTED
     }
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)

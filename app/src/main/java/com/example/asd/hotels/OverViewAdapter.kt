@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import com.example.asd.hotels.dummy.HotelData
-import kotlinx.android.synthetic.main.activity_hotel_detail.view.*
 import kotlinx.android.synthetic.main.hotel_layout.view.*
 
 class OverViewAdapter(
@@ -37,7 +35,8 @@ class OverViewAdapter(
         holder.view.img_hotel.setImageDrawable(
             holder.view.context.getDrawable(hotel_detail.image)
         )
-        holder.view.overview_rating.rating = 1.0F;
+        holder.view.ratingRatingBar.rating = hotel_detail.hotel_rating
+        holder.view.starsRatingBar.rating = hotel_detail.hotel_stars.toFloat()
         holder.view.txt_description.text = hotel_detail.hotel_description;
         holder.view.setOnClickListener {view ->
             d("OverViewAdapter", "clicked!")
