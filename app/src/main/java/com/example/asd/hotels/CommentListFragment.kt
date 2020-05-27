@@ -37,8 +37,8 @@ class CommentListFragment : Fragment() {
 
         // todo use real comments
         val comments = listOf(
-            "Virat Kohli", "Rohit Sharma", "Steve Smith",
-            "Kane Williamson", "Ross Taylor"
+            "It was nice!", "Great view!", "Too many spiders.",
+            "Nice guests!"
         )
         val context: Context = this.context ?: return rootView //
         val listViewAdapter: ArrayAdapter<String>
