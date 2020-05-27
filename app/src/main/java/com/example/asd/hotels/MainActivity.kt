@@ -14,6 +14,8 @@ import com.example.asd.hotels.provider.DatabaseProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main_sorted.*
+import java.io.File
+import java.io.InputStream
 import kotlin.random.Random
 
 
@@ -24,7 +26,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val hotelValues = mutableListOf<HotelData>();
+        val hotelValues = mutableListOf<HotelData>()
+
+        var nameList = resources.getStringArray(R.array.nameList)
 
         try {
             val connectMySql = DatabaseProvider(this)
@@ -48,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 connectMySql.insert_hotel(
                     1,
                     x + 1,
-                    "Sample_name",
+                    "Hotel " + nameList[Random.nextInt(0, nameList.size - 1)],
                     Random.nextInt(1, 100),
                     Random.nextInt(1, 100),
                     "Gutes Hotel!",
