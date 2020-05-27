@@ -46,12 +46,19 @@ class MainActivity : AppCompatActivity() {
 
             for (x in 0 until 10) {
                 connectMySql.insert_hotel(
-                    1, x + 1, "Sample_name", Random.nextInt(1, 100),
-                    Random.nextInt(1, 100), "Gutes Hotel!", x + 1
+                    1,
+                    x + 1,
+                    "Sample_name",
+                    Random.nextInt(1, 100),
+                    Random.nextInt(1, 100),
+                    "Gutes Hotel!",
+                    (Random.nextInt(0, 9) + Random.nextFloat()),
+                    Random.nextInt(1, 5),
+                    x + 1
                 )
             }
 
-            for(x in 1 until 11){
+            for (x in 1 until 11) {
                 hotelValues.add(connectMySql.get_hotels(x))
             }
         } catch (e: Exception) {
@@ -59,7 +66,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         var overViewVisible = true
+        var sortedBy = SortingViewAdapter.SortEnum.UNSORTED
         sort_button_price.setOnClickListener {
+            sort_button_rating.isChecked = false
+            sort_button_stars.isChecked = false
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.PRICE)
@@ -67,14 +77,23 @@ class MainActivity : AppCompatActivity() {
             overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
                 SortingView.setVisibility(View.VISIBLE)
+                sortedBy = SortingViewAdapter.SortEnum.PRICE
                 false
             } else {
-                OverView.setVisibility(View.VISIBLE)
-                SortingView.setVisibility(View.GONE)
-                true
+                if (sortedBy == SortingViewAdapter.SortEnum.PRICE) {
+                    OverView.setVisibility(View.VISIBLE)
+                    SortingView.setVisibility(View.GONE)
+                    sortedBy = SortingViewAdapter.SortEnum.UNSORTED
+                    true
+                } else {
+                    sortedBy = SortingViewAdapter.SortEnum.PRICE
+                    false
+                }
             }
         }
         sort_button_rating.setOnClickListener {
+            sort_button_price.isChecked = false
+            sort_button_stars.isChecked = false
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.RATING)
@@ -82,26 +101,42 @@ class MainActivity : AppCompatActivity() {
             overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
                 SortingView.setVisibility(View.VISIBLE)
+                sortedBy = SortingViewAdapter.SortEnum.RATING
                 false
             } else {
-                OverView.setVisibility(View.VISIBLE)
-                SortingView.setVisibility(View.GONE)
-                true
+                if (sortedBy == SortingViewAdapter.SortEnum.RATING) {
+                    OverView.setVisibility(View.VISIBLE)
+                    SortingView.setVisibility(View.GONE)
+                    sortedBy = SortingViewAdapter.SortEnum.UNSORTED
+                    true
+                } else {
+                    sortedBy = SortingViewAdapter.SortEnum.RATING
+                    false
+                }
             }
         }
         sort_button_stars.setOnClickListener {
+            sort_button_price.isChecked = false
+            sort_button_rating.isChecked = false
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.RATING)
+                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.STARS)
             }
             overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
                 SortingView.setVisibility(View.VISIBLE)
+                sortedBy = SortingViewAdapter.SortEnum.STARS
                 false
             } else {
-                OverView.setVisibility(View.VISIBLE)
-                SortingView.setVisibility(View.GONE)
-                true
+                if (sortedBy == SortingViewAdapter.SortEnum.STARS) {
+                    OverView.setVisibility(View.VISIBLE)
+                    SortingView.setVisibility(View.GONE)
+                    sortedBy = SortingViewAdapter.SortEnum.UNSORTED
+                    true
+                } else {
+                    sortedBy = SortingViewAdapter.SortEnum.STARS
+                    false
+                }
             }
         }
 

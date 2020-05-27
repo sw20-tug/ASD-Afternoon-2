@@ -13,7 +13,7 @@ data class HotelData (
     var hotel_capacity: Int,
     var price: Int,
     var hotel_description: String,
-    var hotel_rating: Int,
+    var hotel_rating: Float,
     var hotel_stars: Int
 ) : Parcelable
 

@@ -80,7 +80,7 @@ class DatabaseProvider(context: Context) {
 
     fun insert_hotel(
         category_id: Int, location_id: Int, name: String, capacity: Int, price: Int,
-        description: String, photogallery_id: Int
+        description: String, rating: Float, stars: Int, photogallery_id: Int
     ) {
         val db = dbHelper.writableDatabase
         // Create a new map of values, where column names are the keys
@@ -90,6 +90,8 @@ class DatabaseProvider(context: Context) {
             put(DBName.HOTEL_CAPACITY_COLUMN, capacity)
             put(DBName.HOTEL_PRICE_COLUMN, price)
             put(DBName.HOTEL_DESCRIPTION_COLUMN, description)
+            put(DBName.HOTEL_RATING_COLUMN, rating)
+            put(DBName.HOTEL_STARS_COLUMN, stars)
             put(DBName.HOTEL_PHOTOGALLERY_ID_COLUMN, photogallery_id)
         }
 
@@ -156,7 +158,7 @@ class DatabaseProvider(context: Context) {
             null
         )
 
-        val returnVal = HotelData(0, 0, "", 0, "", 0, 0, "", 0 , 0)
+        val returnVal = HotelData(0, 0, "", 0, "", 0, 0, "", 0F , 0)
         with(cursor) {
             while (moveToNext()) {
                 returnVal.hotel_id = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_ID_COLUMN))
@@ -169,6 +171,8 @@ class DatabaseProvider(context: Context) {
                 returnVal.hotel_capacity = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_CAPACITY_COLUMN))
                 returnVal.price = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_PRICE_COLUMN))
                 returnVal.hotel_description = cursor.getString(cursor.getColumnIndex(DBName.HOTEL_DESCRIPTION_COLUMN))
+                returnVal.hotel_rating = cursor.getFloat(cursor.getColumnIndex(DBName.HOTEL_RATING_COLUMN))
+                returnVal.hotel_stars  = cursor.getInt(cursor.getColumnIndex(DBName.HOTEL_STARS_COLUMN))
             }
         }
 
