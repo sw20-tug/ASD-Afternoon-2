@@ -26,13 +26,6 @@ class PhotoViewAdapter(private val images: List<Int>,
         holder.view.photoview_item.setImageDrawable(
             holder.view.context.getDrawable(path)
         )
-        holder.view.photoview_item.setOnClickListener {
-            //handle click event on image
-        }
-    }
-
-    class ColorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val photoview_item = view.photoview_item as ImageButton
     }
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)

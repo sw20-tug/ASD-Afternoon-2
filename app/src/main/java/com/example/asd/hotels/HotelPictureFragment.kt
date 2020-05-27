@@ -2,16 +2,20 @@ package com.example.asd.hotels
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asd.hotels.dummy.HotelData
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_hotel_picture.*
+import kotlinx.android.synthetic.main.fragment_hotel_picture.view.*
 
 /**
  * A fragment representing a single Hotel detail screen.
@@ -33,9 +37,6 @@ class HotelPictureFragment : Fragment() {
                 }
             }
         }
-
-
-
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,17 +47,18 @@ class HotelPictureFragment : Fragment() {
         var images =
             listOf(R.drawable.untitled,  R.drawable.untitled,  R.drawable.untitled)
         // Setting up the adapter
+        val adapter = PhotoViewAdapter(images) {
+            // Call the detail view.
+            startActivity(
+                Intent(
+                    this@HotelPictureFragment.context,
+                    HotelDetailActivity::class.java
+                )
+            )
+        }
         val photoview = rootView.findViewById(R.id.PhotoView) as RecyclerView
         photoview.layoutManager = LinearLayoutManager(activity)
-        photoview.adapter =  PhotoViewAdapter(images) {
-                // Call the detail view.
-                startActivity(
-                    Intent(
-                        this@HotelPictureFragment.context,
-                        HotelDetailActivity::class.java
-                    )
-                )
-        }
+        photoview.adapter = adapter
         return rootView
     }
 
