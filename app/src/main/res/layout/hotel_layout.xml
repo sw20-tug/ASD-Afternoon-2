@@ -32,29 +32,29 @@
         android:layout_width="58dp"
         android:layout_height="wrap_content"
         android:text="Price"
-        app:layout_constraintEnd_toStartOf="@+id/txt_description"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hotelCardView" />
 
     <TextView
         android:id="@+id/txt_location"
-        android:layout_width="81dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="4dp"
         android:text="Locations"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/hotelCardView"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_price"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/txt_description"
         tools:text="Locations" />
 
     <TextView
         android:id="@+id/txt_description"
-        android:layout_width="269dp"
-        android:layout_height="63dp"
+        android:layout_width="275dp"
+        android:layout_height="30dp"
         android:padding="4dp"
         android:paddingStart="4dp"
         android:paddingLeft="4dp"
@@ -63,13 +63,12 @@
         android:paddingRight="4dp"
         android:paddingBottom="4dp"
         android:text="Description"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/hotelCardView"
-        app:layout_constraintTop_toBottomOf="@+id/overview_rating"
+        app:layout_constraintTop_toBottomOf="@+id/ratingRatingBar"
         tools:text="Description" />
 
     <RatingBar
-        android:id="@+id/overview_rating"
+        android:id="@+id/ratingRatingBar"
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="160dp"
         android:layout_height="wrap_content"

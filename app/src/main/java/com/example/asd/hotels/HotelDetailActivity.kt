@@ -44,8 +44,10 @@ class HotelDetailActivity(): AppCompatActivity() {
             }
             val hotel_picture_fragment = HotelPictureFragment().apply {
                 arguments = Bundle().apply {
+                    putParcelable(HotelPictureFragment.ARG_ITEM,
+                        hotelData)
                     putInt(
-                        HotelDetailFragment.ARG_ITEM_ID,
+                        HotelPictureFragment.ARG_ITEM_ID,
                         hotelData.hotel_id
                     )
                 }
@@ -84,7 +86,7 @@ class HotelDetailActivity(): AppCompatActivity() {
     fun addRating() {
         //val id = intent.getIntExtra("hotel_id", -1)
         val intent = Intent(this, HotelRatingActivity::class.java)
-        intent.putExtra("hotel_id", hotelData.hotel_id)
+        intent.putExtra("hotelData", hotelData)
         startActivity(intent)
     }
 
