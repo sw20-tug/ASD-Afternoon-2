@@ -76,21 +76,21 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
+
         sort_button_stars.setOnClickListener {
-            SortingView.apply {
-                layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.RATING)
+
+
+
+                   val intent = Intent(
+                        this,
+                        HotelFilterActivity::class.java
+                    )
+                intent.putParcelableArrayListExtra("hotelData", ArrayList(hotelValues))
+            startActivity(intent)
             }
-            overViewVisible = if (overViewVisible) {
-                OverView.setVisibility(View.INVISIBLE)
-                SortingView.setVisibility(View.VISIBLE)
-                false
-            } else {
-                OverView.setVisibility(View.VISIBLE)
-                SortingView.setVisibility(View.GONE)
-                true
-            }
-        }
+
+
+
 
 
         // Setting up the adapter
@@ -133,38 +133,6 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    class Hotel() {
-        var hotel_price = 0;
-        var location_id = 0;
-    }
-
-    fun inPriceRange(minPrice: Int, maxPrice: Int, hotel: Hotel): Boolean {
-        var statePriceR: Boolean = false;
-        if ((hotel.hotel_price <= maxPrice) && (hotel.hotel_price >= minPrice))
-            statePriceR = true;
-        return statePriceR;
-    }
-
-    fun filterbyPrice(hotelsToFilter: MutableList<Hotel>) {
-        hotelsToFilter.forEach { hotel_inList ->
-            //minPrice, maxPrice form RangeSeekBar
-            if (!inPriceRange(0, 100, hotel_inList))
-                hotelsToFilter.remove(hotel_inList);
-        }
-    }
-
-    fun inLocation(location_id: Int, hotel: Hotel): Boolean {
-        var stateLocation: Boolean = false;
-        if (hotel.location_id == location_id)
-            stateLocation = true;
-        return stateLocation;
-    }
-
-    fun filterbyLocation() {
-
-    }
-
 
     /**
      * A native method that is implemented by the 'native-lib' native library,

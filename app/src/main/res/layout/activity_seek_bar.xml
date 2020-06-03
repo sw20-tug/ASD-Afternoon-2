@@ -8,7 +8,7 @@
     tools:context=".HotelFilterActivity">
 
     <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-        android:id="@+id/prange_seekbar"
+        android:id="@+id/seekbar_prange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:corner_radius="10"
@@ -25,13 +25,19 @@
         app:data_type="_integer"/>
 
     <TextView
-        android:id="@+id/price_range"
+        android:id="@+id/txt_price_range"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="0-100"
+        android:text="0 -- 100"
         android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter" />
 
 
 </LinearLayout>
