@@ -16,52 +16,48 @@ import kotlinx.android.synthetic.main.activity_hotel_detail.*
  * in a todo change to ListActivity [*].
  */
 
-class HotelDetailActivity() : AppCompatActivity() {
+class HotelDetailActivity(): AppCompatActivity() {
+    private lateinit var hotelData: HotelData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel_detail)
         setSupportActionBar(detail_toolbar)
-        val hotelId=intent.getIntExtra("hotel_id", -1)
 
-        /*fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
+        hotelData = intent.getParcelableExtra("hotelData")
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // savedInstanceState is non-null when there is fragment state
-        // saved from previous configurations of this activity
-        // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
-        // to its container so we don't need to manually add it.
-        // For more information, see the Fragments API guide at:
-        //
-        // http://developer.android.com/guide/components/fragments.html
-        //
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             val hotel_detail_fragment = HotelDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(
+                    putParcelable(HotelDetailFragment.ARG_ITEM,
+                        hotelData)
+                    putInt(
                         HotelDetailFragment.ARG_ITEM_ID,
-                        intent.getStringExtra(HotelDetailFragment.ARG_ITEM_ID)
+                        hotelData.hotel_id
                     )
                 }
             }
             val hotel_picture_fragment = HotelPictureFragment().apply {
                 arguments = Bundle().apply {
-                    putString(
-                        HotelDetailFragment.ARG_ITEM_ID,
-                        intent.getStringExtra(HotelDetailFragment.ARG_ITEM_ID)
+                    putParcelable(HotelPictureFragment.ARG_ITEM,
+                        hotelData)
+                    putInt(
+                        HotelPictureFragment.ARG_ITEM_ID,
+                        hotelData.hotel_id
                     )
                 }
             }
             val comment_fragment = CommentListFragment().apply {
                 arguments = Bundle().apply {
+                    putInt(
+                        HotelDetailFragment.ARG_ITEM_ID,
+                        hotelData.hotel_id
+                    )
                 }
             }
             supportFragmentManager.beginTransaction()
@@ -76,19 +72,21 @@ class HotelDetailActivity() : AppCompatActivity() {
         ratingButton.setOnClickListener{ view -> addRating() }
     }
     fun initializeHotelInfos() {
-        // todo set to real name
-        supportActionBar?.title = "Test name";
+        supportActionBar?.title = hotelData.hotel_name
+        val hotelStars: RatingBar = findViewById<RatingBar>(R.id.hotelStars)
+        if (hotelStars != null) {
+            hotelStars.rating = (hotelData.hotel_stars).toFloat();
+        }
         val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
         if (ratingBar != null) {
-            // todo set to rating saved in db
-            ratingBar.rating = 4.0F;
+            ratingBar.rating = (hotelData.hotel_rating).toFloat();
         }
     }
 
     fun addRating() {
-        val id = intent.getIntExtra("hotel_id", -1)
+        //val id = intent.getIntExtra("hotel_id", -1)
         val intent = Intent(this, HotelRatingActivity::class.java)
-        intent.putExtra("hotel_id", id)
+        intent.putExtra("hotelData", hotelData)
         startActivity(intent)
     }
 
@@ -108,3 +106,4 @@ class HotelDetailActivity() : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 }
+

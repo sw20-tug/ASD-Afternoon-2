@@ -5,34 +5,50 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RatingBar
+import android.widget.TextView
+import com.example.asd.hotels.dummy.HotelData
+import kotlinx.android.synthetic.main.activity_hotel_rating.*
 import kotlinx.android.synthetic.main.hotel_detail.*
 
 class HotelRatingActivity : AppCompatActivity() {
+    private lateinit var hotelData: HotelData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel_rating)
 
+        hotelData = intent.getParcelableExtra("hotelData")
+
         val done = findViewById<Button>(R.id.button_done)
         val dismiss = findViewById<Button>(R.id.button_dismiss)
-        val rating_bar = findViewById<RatingBar>(R.id.rate_hotel)
+        val naming = findViewById<TextView>(R.id.hotel_name)
 
         //Button done clicked:
-        done.setOnClickListener {
-            //new comment in DB erstellen -> comment abspeichern
+        done.setOnClickListener {view -> doneWithRating() }
 
-            //rating abspeichern und gesamtbewertung neu berechnen
+        //Button dismiss clicked
+        dismiss.setOnClickListener {view -> dismissView()}
 
-            //zurück zum detailview gehen
-            val intent = Intent(this, HotelDetailActivity::class.java)
-            startActivity(intent)
+        if (savedInstanceState == null) {
+            naming.text = hotelData.hotel_name
         }
+    }
 
-        dismiss.setOnClickListener {
-            //zurück zum detailview gehen
-            val intent = Intent(this, HotelDetailActivity::class.java)
-            startActivity(intent)
-        }
 
+
+    fun doneWithRating(){
+
+        val barRating = findViewById<RatingBar>(R.id.rate_hotel).numStars
+        val oldRating = hotelData.hotel_rating
+        val newRating = (barRating + oldRating) / 2
+        hotelData.hotel_rating = newRating
+
+        //zurück zum detailview gehen
+        super.onBackPressed();
+    }
+
+    fun dismissView() {
+        //zurück zum detailview gehen
+        super.onBackPressed();
     }
 }

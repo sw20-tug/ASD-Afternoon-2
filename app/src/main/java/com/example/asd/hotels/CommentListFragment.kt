@@ -11,24 +11,19 @@ import android.widget.ListView
 import kotlinx.android.synthetic.main.fragment_comment_list.*
 import kotlinx.android.synthetic.main.fragment_comment_list.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_ITEM_ID = "hotel_id"
 /**
  * A simple [Fragment] subclass.
  * Use the [CommentListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class CommentListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var hotel_id: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            hotel_id = it.getInt(ARG_ITEM_ID)
         }
     }
 
@@ -42,8 +37,8 @@ class CommentListFragment : Fragment() {
 
         // todo use real comments
         val comments = listOf(
-            "Virat Kohli", "Rohit Sharma", "Steve Smith",
-            "Kane Williamson", "Ross Taylor"
+            "It was nice!", "Great view!", "Too many spiders.",
+            "Nice guests!"
         )
         val context: Context = this.context ?: return rootView //
         val listViewAdapter: ArrayAdapter<String>
@@ -57,17 +52,15 @@ class CommentListFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * @param hotel_id Hotel id
          * @return A new instance of fragment CommentListFragment.
          */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(hotel_id: Int) =
             CommentListFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putInt(ARG_ITEM_ID, hotel_id)
                 }
             }
     }

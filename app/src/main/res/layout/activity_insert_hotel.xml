@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".InsertHotelActivity">
+    <TextView
+            android:id="@+id/insert_label"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textSize="18sp"
+            android:text="@string/insertHotel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+            android:id="@+id/save_hotel"
+            style="@style/TextAppearance.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/save_hotel">
+
+        <TextView
+                android:layout_width="186dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/insert_label"/>
+
+        <EditText
+                android:id="@+id/hotel_name"
+                style=""
+                android:text=""
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/insert_label"
+                android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name">
+
+        <TextView
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:text="@string/location" />
+
+        <EditText
+                android:id="@+id/hotel_location"
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location">
+
+        <TextView
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:text="@string/category" />
+
+        <EditText
+                android:id="@+id/hotel_category"
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:text=""
+                android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category">
+
+        <TextView
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:text="@string/capacity" />
+
+        <EditText
+                android:id="@+id/hotel_capacity"
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/capacity">
+
+        <TextView
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:text="@string/price" />
+
+        <EditText
+                android:id="@+id/hotel_price"
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price">
+
+        <TextView
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:text="@string/description" />
+
+        <EditText
+                android:id="@+id/hotel_description"
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent"    />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/stars"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description">
+
+        <TextView
+                android:layout_width="186dp"
+                android:layout_height="20dp"
+                android:text="@string/stars" />
+
+        <RatingBar
+                android:id="@+id/hotel_stars"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="0"
+                android:indeterminate="false"
+                android:isIndicator="false"
+                android:progressTint="#009688"
+                android:saveEnabled="false"
+                android:stepSize="1" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

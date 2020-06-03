@@ -18,6 +18,7 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,42 +32,41 @@
                 android:textColor="#000000"
                 android:text="@string/sorting_text" />
 
-            <Button
+            <ToggleButton
                 android:id="@+id/sort_button_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/sorting_text_stars" />
+                android:text="@string/sorting_text_stars"
+                android:textOff="@string/sorting_text_stars"
+                android:textOn="@string/sorting_text_stars" />
 
-            <Button
+            <ToggleButton
                 android:id="@+id/sort_button_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/sorting_text_rating" />
+                android:text="@string/sorting_text_rating"
+                android:textOff="@string/sorting_text_rating"
+                android:textOn="@string/sorting_text_rating" />
 
-            <Button
+            <ToggleButton
                 android:id="@+id/sort_button_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/sorting_text_price" />
+                android:checked="false"
+                android:text="@string/sorting_text_price"
+                android:textOff="@string/sorting_text_price"
+                android:textOn="@string/sorting_text_price" />
 
         </LinearLayout>
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
     <include layout="@layout/content_main_sorted" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <include layout="@layout/content_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
