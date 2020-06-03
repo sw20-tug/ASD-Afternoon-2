@@ -2,7 +2,6 @@ package com.example.asd.hotels
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -10,8 +9,8 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
 import androidx.test.espresso.intent.matcher.IntentMatchers.*
 import androidx.test.espresso.intent.rule.IntentsTestRule
-import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.asd.hotels.dummy.HotelData
@@ -68,11 +67,10 @@ class HotelDetailActivityTest {
         }
         mActivityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
             .add(R.id.hotel_picture_container, fragment).commit()
-
-        //onView(withId(R.id.PhotoView)).check(matches(isDisplayed()))
     }
 
-    @Test fun testDetailFragment() {
+
+@Test fun testDetailFragment() {
         // check if hotel pictures are displayed
         val fragment = HotelDetailFragment().apply {
             arguments = Bundle().apply {
@@ -102,7 +100,7 @@ class HotelDetailActivityTest {
         intended(allOf(
             hasComponent(hasShortClassName(".HotelRatingActivity")),
             toPackage(PACKAGE_NAME),
-            hasExtra("hotel_id", hotelData.hotel_id)))
+            hasExtra("hotelData", hotelData)))
     }
 
 }
