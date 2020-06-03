@@ -1,6 +1,7 @@
 package com.example.asd.hotels
 
 import android.content.Intent
+import android.os.Bundle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -12,12 +13,12 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
 import com.example.asd.hotels.dummy.HotelData
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.fragment.app.testing.launchFragmentInContainer as launchFragmentInContainer1
 
 
 private const val PACKAGE_NAME = "com.example.asd.hotels"
@@ -52,6 +53,40 @@ class HotelDetailActivityTest {
         onView(withId(R.id.hotelStars)).check(matches(isDisplayed()))
         // todo check if stars are correctly set
     }
+    @Test fun testPictureFragment() {
+        // check if hotel pictures are displayed
+        val fragment = HotelPictureFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(HotelDetailFragment.ARG_ITEM,
+                    hotelData)
+                putInt(
+                    HotelDetailFragment.ARG_ITEM_ID,
+                    hotelData.hotel_id
+                )
+            }
+        }
+        mActivityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
+            .add(R.id.hotel_picture_container, fragment).commit()
+    }
+
+
+@Test fun testDetailFragment() {
+        // check if hotel pictures are displayed
+        val fragment = HotelDetailFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(HotelDetailFragment.ARG_ITEM,
+                    hotelData)
+                putInt(
+                    HotelDetailFragment.ARG_ITEM_ID,
+                    hotelData.hotel_id
+                )
+            }
+        }
+
+        mActivityTestRule.getActivity().getSupportFragmentManager().beginTransaction()
+            .add(R.id.hotel_detail_container, fragment).commit()
+
+    }
 
     @Test
     fun verifyIfHotelRatingOpens() {
@@ -65,7 +100,7 @@ class HotelDetailActivityTest {
         intended(allOf(
             hasComponent(hasShortClassName(".HotelRatingActivity")),
             toPackage(PACKAGE_NAME),
-            hasExtra("hotel_id", hotelData.hotel_id)))
+            hasExtra("hotelData", hotelData)))
     }
 
 }
