@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:corner_radius="10"
         app:min_value="0"
-        app:max_value="1000"
+        app:max_value="100"
         app:gap="10"
         app:steps="1"
         app:bar_color="#000000"

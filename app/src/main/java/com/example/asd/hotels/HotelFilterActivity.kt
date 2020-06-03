@@ -1,13 +1,12 @@
 package com.example.asd.hotels
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.widget.SeekBar
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.activity_seek_bar.*
+
 
 class HotelFilterActivity() : AppCompatActivity() {
 
@@ -23,16 +22,14 @@ class HotelFilterActivity() : AppCompatActivity() {
         return statePriceR;
     }
 
-    fun filterbyPrice(minimumPrice:Int, maximumPrice:Int, hotelsToFilter: ArrayList<HotelData>) : List<HotelData>{
-        var hotelsFiltered:ArrayList<HotelData>
-        hotelsFiltered= hotelsToFilter.filter{ it.price < 3} as ArrayList<HotelData>
+    fun filterbyPrice(minimumPrice:Int, maximumPrice:Int) {
+        hotelIsListed = hotelIsListed.filter{ it.price in minimumPrice until maximumPrice } as ArrayList<HotelData>
         /*for(hotel_inList in hotelsToFilter) {
             //minPrice, maxPrice from RangeSeekBar
             if (!inPriceRange(minimumPrice, maximumPrice, hotel_inList))
                 hotelsToFilter.remove(hotel_inList);
 
         }*/
-        return hotelsFiltered
     }
 
     fun inLocation(location_id: String, hotel: HotelData): Boolean {
@@ -58,7 +55,11 @@ class HotelFilterActivity() : AppCompatActivity() {
             seekb_maxPrice = maxValue.toInt()
         }
         btn_filter.setOnClickListener {
-            filterbyPrice(seekb_minPrice,seekb_maxPrice, hotelIsListed)
+            filterbyPrice(seekb_minPrice,seekb_maxPrice)
+            val intent = Intent()
+            intent.putExtra("keyName", hotelIsListed)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
 
     }
