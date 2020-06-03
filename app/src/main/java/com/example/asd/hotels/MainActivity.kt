@@ -1,14 +1,15 @@
 package com.example.asd.hotels
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
-import android.util.Log.d
 import android.view.View
-import android.widget.Button
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asd.hotels.dummy.HotelData
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter_: OverViewAdapter
     lateinit var adapter_sort: SortingViewAdapter
     lateinit var hotelValues: MutableList<HotelData>
+    lateinit var hotelValuesOverView: MutableList<HotelData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         hotelValues = mutableListOf<HotelData>()
 
         adapter_sort = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.UNSORTED)
-
 
 
         var nameList = resources.getStringArray(R.array.nameList)
@@ -76,6 +77,11 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             d("MainActivity Db error", e.message)
         }
+
+        hotelValuesOverView = mutableListOf<HotelData>()
+        hotelValuesOverView.addAll(
+            hotelValues
+        )
 
         var overViewVisible = true
         var sortedBy = SortingViewAdapter.SortEnum.UNSORTED
@@ -129,6 +135,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         sort_button_stars.setOnClickListener {
             sort_button_price.isChecked = false
             sort_button_rating.isChecked = false
@@ -157,6 +164,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // Setting up the adapter
+
         adapter_ = OverViewAdapter(hotelValues) {
             d("MainActivity", "Hi from main")
             // Call the detail view.
@@ -191,96 +199,153 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.add_hotel -> {
-                val insertHotel = Intent(this.applicationContext, InsertHotelActivity::class.java)
-                this.applicationContext.startActivity(insertHotel)
+            R.id.action_settings -> {
+
+                textView3.setText(R.string.sorting_text)
+                sort_button_stars.setText(R.string.sorting_text_stars)
+                sort_button_stars.setTextOn(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_stars)
+                )
+                sort_button_stars.setTextOff(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_stars)
+                )
+                sort_button_rating.setText(R.string.sorting_text_rating)
+                sort_button_rating.setTextOn(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_rating)
+                )
+                sort_button_rating.setTextOff(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_rating)
+                )
+                sort_button_price.setText(R.string.sorting_text_price)
+                sort_button_price.setTextOn(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_price)
+                )
+                sort_button_price.setTextOff(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_price)
+                )
+                textView.setText(R.string.starsString)
+                textView2.setText(R.string.ratingString)
+                adapter_.notifyDataSetChanged()
+                adapter_sort.notifyDataSetChanged()
+
+                OverViewAdapter.translate = false
+                OverView.removeAllViewsInLayout()
+                adapter_.createViewHolder(
+                    getWindow().getDecorView().getRootView() as ViewGroup,
+                    1337
+                )
+                OverView.adapter = adapter_
+
+                SortingViewAdapter.translate = false
+                SortingView.removeAllViewsInLayout()
+                adapter_sort.createViewHolder(
+                    getWindow().getDecorView().getRootView() as ViewGroup,
+                    1337
+                )
+                SortingView.adapter = adapter_sort
+
+
                 true
             }
             R.id.action_language -> {
-                if (textView3.text == this.applicationContext.resources
-                        .getString(R.string.sorting_text)
-                ) {
-                    textView3.setText(R.string.sorting_textd)
-                    sort_button_stars.setText(R.string.sorting_text_starsd)
-                    sort_button_stars.setTextOn(this.applicationContext.resources
-                        .getString(R.string.sorting_text_starsd))
-                    sort_button_stars.setTextOff(this.applicationContext.resources
-                        .getString(R.string.sorting_text_starsd))
-                    sort_button_rating.setText(R.string.sorting_text_ratingd)
-                    sort_button_rating.setTextOn(this.applicationContext.resources
-                        .getString(R.string.sorting_text_ratingd))
-                    sort_button_rating.setTextOff(this.applicationContext.resources
-                        .getString(R.string.sorting_text_ratingd))
-                    sort_button_price.setText(R.string.sorting_text_priced)
-                    sort_button_price.setTextOn(this.applicationContext.resources
-                        .getString(R.string.sorting_text_priced))
-                    sort_button_price.setTextOff(this.applicationContext.resources
-                        .getString(R.string.sorting_text_priced))
-                    textView.setText(R.string.starsStringd)
-                    textView2.setText(R.string.ratingStringd)
-                    adapter_.notifyDataSetChanged()
-                    adapter_sort.notifyDataSetChanged()
-                }
-                else
-                {
-                    textView3.setText(R.string.sorting_text)
-                    sort_button_stars.setText(R.string.sorting_text_stars)
-                    sort_button_stars.setTextOn(this.applicationContext.resources
-                        .getString(R.string.sorting_text_stars))
-                    sort_button_stars.setTextOff(this.applicationContext.resources
-                        .getString(R.string.sorting_text_stars))
-                    sort_button_rating.setText(R.string.sorting_text_rating)
-                    sort_button_rating.setTextOn(this.applicationContext.resources
-                        .getString(R.string.sorting_text_rating))
-                    sort_button_rating.setTextOff(this.applicationContext.resources
-                        .getString(R.string.sorting_text_rating))
-                    sort_button_price.setText(R.string.sorting_text_price)
-                    sort_button_price.setTextOn(this.applicationContext.resources
-                        .getString(R.string.sorting_text_price))
-                    sort_button_price.setTextOff(this.applicationContext.resources
-                        .getString(R.string.sorting_text_price))
-                    textView.setText(R.string.starsString)
-                    textView2.setText(R.string.ratingString)
-                    adapter_.notifyDataSetChanged()
-                    adapter_sort.notifyDataSetChanged()
-                }
+                textView3.setText(R.string.sorting_textd)
+                sort_button_stars.setText(R.string.sorting_text_starsd)
+                sort_button_stars.setTextOn(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_starsd)
+                )
+                sort_button_stars.setTextOff(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_starsd)
+                )
+                sort_button_rating.setText(R.string.sorting_text_ratingd)
+                sort_button_rating.setTextOn(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_ratingd)
+                )
+                sort_button_rating.setTextOff(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_ratingd)
+                )
+                sort_button_price.setText(R.string.sorting_text_priced)
+                sort_button_price.setTextOn(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_priced)
+                )
+                sort_button_price.setTextOff(
+                    this.applicationContext.resources
+                        .getString(R.string.sorting_text_priced)
+                )
+                textView.setText(R.string.starsStringd)
+                textView2.setText(R.string.ratingStringd)
+                adapter_.notifyDataSetChanged()
+                adapter_sort.notifyDataSetChanged()
+                OverViewAdapter.translate = true
+                OverView.removeAllViewsInLayout()
+                adapter_.createViewHolder(
+                    getWindow().getDecorView().getRootView() as ViewGroup,
+                    1337
+                )
+                OverView.adapter = adapter_
+                SortingViewAdapter.translate = true
+                SortingView.removeAllViewsInLayout()
+                adapter_sort.createViewHolder(
+                    getWindow().getDecorView().getRootView() as ViewGroup,
+                    1337
+                )
+                SortingView.adapter = adapter_sort
+                true
+            }
+            R.id.action_filter -> {
+                val intent = Intent(
+                    this,
+                    HotelFilterActivity::class.java
+                )
+                intent.putParcelableArrayListExtra("hotelData", ArrayList(hotelValues))
+                startActivityForResult(intent, 1)
+                true
+            }
+            R.id.action_reset -> {
+                adapter_.hotel_details = hotelValuesOverView
+                hotelValues = hotelValuesOverView
+                adapter_.notifyDataSetChanged()
+                adapter_sort.hotel_details =
+                    adapter_sort.sortData(hotelValuesOverView).toMutableList()
+                adapter_sort.notifyDataSetChanged()
+                true
+            }
+           R.id.add_hotel -> {
+                val insertHotel = Intent(this.applicationContext, InsertHotelActivity::class.java)
+                this.applicationContext.startActivity(insertHotel)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    class Hotel() {
-        var hotel_price = 0;
-        var location_id = 0;
-    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-    fun inPriceRange(minPrice: Int, maxPrice: Int, hotel: Hotel): Boolean {
-        var statePriceR: Boolean = false;
-        if ((hotel.hotel_price <= maxPrice) && (hotel.hotel_price >= minPrice))
-            statePriceR = true;
-        return statePriceR;
-    }
+        // Check that it is the SecondActivity with an OK result
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
 
-    fun filterbyPrice(hotelsToFilter: MutableList<Hotel>) {
-        hotelsToFilter.forEach { hotel_inList ->
-            //minPrice, maxPrice form RangeSeekBar
-            if (!inPriceRange(0, 100, hotel_inList))
-                hotelsToFilter.remove(hotel_inList);
+                // Get String data from Intent
+                if (data != null) {
+                    hotelValues =
+                        data.getParcelableArrayListExtra<HotelData>("keyName").toMutableList()
+                    adapter_.hotel_details = hotelValues
+                    adapter_.notifyDataSetChanged()
+                }
+            }
         }
     }
-
-    fun inLocation(location_id: Int, hotel: Hotel): Boolean {
-        var stateLocation: Boolean = false;
-        if (hotel.location_id == location_id)
-            stateLocation = true;
-        return stateLocation;
-    }
-
-    fun filterbyLocation() {
-
-    }
-
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
@@ -296,4 +361,3 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 }
-

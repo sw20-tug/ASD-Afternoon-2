@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Hotels</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_language">Switch Language</string>
+
+    <string name="action_settings">English</string>
+    <string name="action_language">Deutsch</string>
+
     <string name="add_hotel">Add Hotel</string>
+
     <string name="title_hotel_list">Hotels</string>
     <string name="title_hotel_detail">Hotel Detail</string>
     <string name="sorting_text">sort by</string>
@@ -26,6 +29,11 @@
 
     <string name="starsString">Stars</string>
     <string name="ratingString">Rating</string>
+
+    <string name="filterString">Filter</string>
+    <string name="resetString">Reset Filter</string>
+
+    <string name="testString">Test</string>
 
 
 

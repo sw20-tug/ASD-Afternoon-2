@@ -10,15 +10,26 @@ import com.example.asd.hotels.dummy.HotelData
 import kotlinx.android.synthetic.main.hotel_layout.view.*
 
 class SortingViewAdapter(
-    private val hotel_details: MutableList<HotelData>,
+    var hotel_details: MutableList<HotelData>,
     private var sortByValue: SortEnum = SortEnum.PRICE
 ) :
     RecyclerView.Adapter<SortingViewAdapter.ViewHolder>() {
+
+    companion object {
+        var translate = false
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutView = LayoutInflater.from(parent.context).inflate(
-            R.layout.hotel_layout,
-            parent, false
-        )
+        val layoutView : View = if(translate) {
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.hotel_layout_german,
+                parent, false
+            )
+        } else {
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.hotel_layout,
+                parent, false)
+        }
         return ViewHolder(layoutView)
     }
 
