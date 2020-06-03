@@ -321,8 +321,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
            R.id.add_hotel -> {
-                val insertHotel = Intent(this.applicationContext, InsertHotelActivity::class.java)
-                this.applicationContext.startActivity(insertHotel)
+                val insertHotel = Intent(this@MainActivity, InsertHotelActivity::class.java)
+                this@MainActivity.startActivity(insertHotel)
                 true
             }
             else -> super.onOptionsItemSelected(item)

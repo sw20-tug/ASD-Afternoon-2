@@ -39,10 +39,10 @@
                 android:name=".HotelDetailActivity"
                 android:label="@string/app_name"
                 android:parentActivityName=".MainActivity"
-                android:theme="@style/AppTheme.NoActionBar"> <!-- todo change MainActivity to ListAcitvity -->
+                android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.example.asd.hotels.MainActivity" /> <!-- todo change MainActivity to ListAcitvity -->
+                    android:value="com.example.asd.hotels.MainActivity" />
         </activity>
         <activity android:name=".InsertHotelActivity"
                 android:label="@string/app_name">
@@ -50,8 +50,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.asd.hotels.MainActivity" />
         </activity>
         <uses-library
                 android:name="android.test.runner"
