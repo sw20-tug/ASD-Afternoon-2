@@ -22,13 +22,13 @@ import androidx.fragment.app.testing.launchFragmentInContainer as launchFragment
 
 private const val PACKAGE_NAME = "com.example.asd.hotels"
 
-
-@Test fun testDatabase() {
+class DatabaseTest {
+@Test
+    fun testDatabase() {
     val testDatabaseProvider : DatabaseProvider
-    testDatabaseProvider.insert_hotel(1, 1, "Overlook Hotel", 237, 0, "Take care.", 3.0f, 7, 1)
+    val test_location_id = testDatabaseProvider.insert_location("Bielefeld")
 
-    val realHotelData = testDatabaseProvider.get_hotels(1)
-    val expectedHotelData = HotelData(1, 1, 1, 1, "Overlook Hotel", 237, 0, "Take care.", 3.0f, 7)
+    val test_location_name = testDatabaseProvider.get_location(test_location_id)
 
-    assertEquals(expectedHotelData, realHotelData)
+    assertEquals("Bielefeld", test_location_name)
 }
