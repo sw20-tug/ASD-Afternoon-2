@@ -4,10 +4,15 @@
     tools:context="com.example.asd.hotels.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_language"
         android:title="@string/action_language" />
+    <item
+        android:id="@+id/action_filter"
+        android:title="@string/filterString" />
+    <item
+        android:id="@+id/action_reset"
+        android:title="@string/resetString" />
 </menu>
