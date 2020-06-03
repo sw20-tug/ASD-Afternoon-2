@@ -112,14 +112,15 @@
 
             <FrameLayout
                     android:id="@+id/hotel_picture_container"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="20" />
 
             <FrameLayout
                     android:id="@+id/comment_list_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
