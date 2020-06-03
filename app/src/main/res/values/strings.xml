@@ -3,11 +3,22 @@
     <string name="action_settings">Settings</string>
     <string name="title_hotel_list">Hotels</string>
     <string name="title_hotel_detail">Hotel Detail</string>
+    var hotelData: HotelData = HotelData(1, 2, "there",  R.drawable.untitled, "Hotel SUPER", 200, 20, "Nice hotel", 5.0F, 4)
 
     <string name="sorting_text">sort by</string>
     <string name="sorting_text_stars">stars</string>
     <string name="sorting_text_rating">rating</string>
     <string name="sorting_text_price">price</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="category">Category</string>
+    <string name="capacity">Capacity</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
+    <string name="stars">Stars</string>
+    <string name="insertHotel">Insert new hotel</string>
+    <string name="save">Save</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
