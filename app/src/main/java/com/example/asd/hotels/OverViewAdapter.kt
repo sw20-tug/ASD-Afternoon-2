@@ -8,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.asd.hotels.dummy.HotelData
+import kotlinx.android.synthetic.main.hotel_layout.*
 import kotlinx.android.synthetic.main.hotel_layout.view.*
+import kotlinx.android.synthetic.main.hotel_layout.view.textView
+import kotlinx.android.synthetic.main.hotel_layout.view.textView2
 
 class OverViewAdapter(
     private val hotel_details: List<HotelData>,
