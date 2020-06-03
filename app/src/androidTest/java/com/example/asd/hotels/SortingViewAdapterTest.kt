@@ -31,7 +31,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                3,
+                3F,
                 1
             )
         )
@@ -45,7 +45,7 @@ class SortingViewAdapterTest {
                 1,
                 2,
                 "Gutes Hotel",
-                2,
+                2F,
                 3
             )
         )
@@ -59,7 +59,7 @@ class SortingViewAdapterTest {
                 1,
                 3,
                 "Gutes Hotel",
-                1,
+                1F,
                 2
             )
         )
@@ -73,7 +73,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                2,
+                2F,
                 2
             )
         )
@@ -91,7 +91,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                3,
+                3F,
                 1
             )
         )
@@ -105,7 +105,7 @@ class SortingViewAdapterTest {
                 1,
                 3,
                 "Gutes Hotel",
-                1,
+                1F,
                 2
             )
         )
@@ -119,7 +119,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                2,
+                2F,
                 2
             )
         )
@@ -133,7 +133,7 @@ class SortingViewAdapterTest {
                 1,
                 2,
                 "Gutes Hotel",
-                2,
+                2F,
                 3
             )
         )
@@ -150,7 +150,7 @@ class SortingViewAdapterTest {
                 1,
                 3,
                 "Gutes Hotel",
-                1,
+                1F,
                 2
             )
         )
@@ -164,7 +164,7 @@ class SortingViewAdapterTest {
                 1,
                 2,
                 "Gutes Hotel",
-                2,
+                2F,
                 3
             )
         )
@@ -178,7 +178,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                2,
+                2F,
                 2
             )
         )
@@ -193,7 +193,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                3,
+                3F,
                 1
             )
         )
@@ -210,7 +210,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                3,
+                3F,
                 1
             )
         )
@@ -224,7 +224,7 @@ class SortingViewAdapterTest {
                 1,
                 1,
                 "Gutes Hotel",
-                2,
+                2F,
                 2
             )
         )
@@ -238,7 +238,7 @@ class SortingViewAdapterTest {
                 1,
                 2,
                 "Gutes Hotel",
-                2,
+                2F,
                 3
             )
         )
@@ -252,7 +252,7 @@ class SortingViewAdapterTest {
                 1,
                 3,
                 "Gutes Hotel",
-                1,
+                1F,
                 2
             )
         )

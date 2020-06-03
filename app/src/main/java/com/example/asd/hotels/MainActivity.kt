@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.util.Log.d
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asd.hotels.dummy.HotelData
@@ -14,19 +15,25 @@ import com.example.asd.hotels.provider.DatabaseProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main_sorted.*
-import java.io.File
-import java.io.InputStream
+import kotlinx.android.synthetic.main.hotel_layout.*
 import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
+    lateinit var adapter_: OverViewAdapter
+    lateinit var adapter_sort: SortingViewAdapter
+    lateinit var hotelValues: MutableList<HotelData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val hotelValues = mutableListOf<HotelData>()
+        hotelValues = mutableListOf<HotelData>()
+
+        adapter_sort = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.UNSORTED)
+
+
 
         var nameList = resources.getStringArray(R.array.nameList)
 
@@ -74,9 +81,10 @@ class MainActivity : AppCompatActivity() {
         sort_button_price.setOnClickListener {
             sort_button_rating.isChecked = false
             sort_button_stars.isChecked = false
+            adapter_sort = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.PRICE)
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.PRICE)
+                adapter = adapter_sort
             }
             overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
@@ -98,9 +106,10 @@ class MainActivity : AppCompatActivity() {
         sort_button_rating.setOnClickListener {
             sort_button_price.isChecked = false
             sort_button_stars.isChecked = false
+            adapter_sort = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.RATING)
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.RATING)
+                adapter = adapter_sort
             }
             overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
@@ -122,9 +131,10 @@ class MainActivity : AppCompatActivity() {
         sort_button_stars.setOnClickListener {
             sort_button_price.isChecked = false
             sort_button_rating.isChecked = false
+            adapter_sort = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.STARS)
             SortingView.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = SortingViewAdapter(hotelValues, SortingViewAdapter.SortEnum.STARS)
+                adapter = adapter_sort
             }
             overViewVisible = if (overViewVisible) {
                 OverView.setVisibility(View.INVISIBLE)
@@ -146,28 +156,27 @@ class MainActivity : AppCompatActivity() {
 
 
         // Setting up the adapter
+        adapter_ = OverViewAdapter(hotelValues) {
+            d("MainActivity", "Hi from main")
+            // Call the detail view.
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    HotelDetailActivity::class.java
+                )
+            )
+        }
         OverView.apply {
             // Set up the layer
             layoutManager = LinearLayoutManager(this@MainActivity)
             // Pass the list into OverViewAdapter
-            adapter = OverViewAdapter(hotelValues) {
-                d("MainActivity", "Hi from main")
-                // Call the detail view.
-                startActivity(
-                    Intent(
-                        this@MainActivity,
-                        HotelDetailActivity::class.java
-                    )
-                )
-            }
+            adapter = adapter_
         }
 
         // Add item separator to the overview.
         val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         OverView.addItemDecoration(itemDecor)
-
-        // Example of a call to a native method
-//        sample_text.text = stringFromJNI()
+        SortingView.addItemDecoration(itemDecor)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -181,7 +190,56 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_language -> {
+                if (textView3.text == this.applicationContext.resources
+                        .getString(R.string.sorting_text)
+                ) {
+                    textView3.setText(R.string.sorting_textd)
+                    sort_button_stars.setText(R.string.sorting_text_starsd)
+                    sort_button_stars.setTextOn(this.applicationContext.resources
+                        .getString(R.string.sorting_text_starsd))
+                    sort_button_stars.setTextOff(this.applicationContext.resources
+                        .getString(R.string.sorting_text_starsd))
+                    sort_button_rating.setText(R.string.sorting_text_ratingd)
+                    sort_button_rating.setTextOn(this.applicationContext.resources
+                        .getString(R.string.sorting_text_ratingd))
+                    sort_button_rating.setTextOff(this.applicationContext.resources
+                        .getString(R.string.sorting_text_ratingd))
+                    sort_button_price.setText(R.string.sorting_text_priced)
+                    sort_button_price.setTextOn(this.applicationContext.resources
+                        .getString(R.string.sorting_text_priced))
+                    sort_button_price.setTextOff(this.applicationContext.resources
+                        .getString(R.string.sorting_text_priced))
+                    textView.setText(R.string.starsStringd)
+                    textView2.setText(R.string.ratingStringd)
+                    adapter_.notifyDataSetChanged()
+                    adapter_sort.notifyDataSetChanged()
+                }
+                else
+                {
+                    textView3.setText(R.string.sorting_text)
+                    sort_button_stars.setText(R.string.sorting_text_stars)
+                    sort_button_stars.setTextOn(this.applicationContext.resources
+                        .getString(R.string.sorting_text_stars))
+                    sort_button_stars.setTextOff(this.applicationContext.resources
+                        .getString(R.string.sorting_text_stars))
+                    sort_button_rating.setText(R.string.sorting_text_rating)
+                    sort_button_rating.setTextOn(this.applicationContext.resources
+                        .getString(R.string.sorting_text_rating))
+                    sort_button_rating.setTextOff(this.applicationContext.resources
+                        .getString(R.string.sorting_text_rating))
+                    sort_button_price.setText(R.string.sorting_text_price)
+                    sort_button_price.setTextOn(this.applicationContext.resources
+                        .getString(R.string.sorting_text_price))
+                    sort_button_price.setTextOff(this.applicationContext.resources
+                        .getString(R.string.sorting_text_price))
+                    textView.setText(R.string.starsString)
+                    textView2.setText(R.string.ratingString)
+                    adapter_.notifyDataSetChanged()
+                    adapter_sort.notifyDataSetChanged()
+                }
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
