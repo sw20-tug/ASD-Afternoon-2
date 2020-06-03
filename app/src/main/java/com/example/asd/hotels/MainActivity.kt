@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.util.Log.d
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -190,6 +191,11 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
+            R.id.add_hotel -> {
+                val insertHotel = Intent(this.applicationContext, InsertHotelActivity::class.java)
+                this.applicationContext.startActivity(insertHotel)
+                true
+            }
             R.id.action_language -> {
                 if (textView3.text == this.applicationContext.resources
                         .getString(R.string.sorting_text)

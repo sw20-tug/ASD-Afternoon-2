@@ -1,9 +1,7 @@
 package com.example.asd.hotels
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -16,29 +14,37 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.asd.hotels.dummy.HotelData
-import com.example.asd.hotels.provider.DatabaseProvider
-import junit.framework.Assert.assertEquals
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.fragment.app.testing.launchFragmentInContainer as launchFragmentInContainer1
 
+
 private const val PACKAGE_NAME = "com.example.asd.hotels"
 
-class DatabaseTest {
-    @Test
-    fun testDatabase() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
 
-        val testDatabaseProvider: DatabaseProvider = DatabaseProvider(context)
-        val test_location_id = testDatabaseProvider.insert_location("Bielefeld")
-        var id = -1;
-        if (test_location_id != null) {
-            id = test_location_id.toInt()
+
+@RunWith(AndroidJUnit4::class)
+class InsertHotelActivityTest {
+
+    @get:Rule
+    val mActivityTestRule: IntentsTestRule<InsertHotelActivity> =
+        object : IntentsTestRule<InsertHotelActivity>(InsertHotelActivity::class.java) {
+            override fun getActivityIntent(): Intent {
+                val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
+                return Intent(targetContext, InsertHotelActivity::class.java).apply {}
+            }
         }
-        val test_location_name = testDatabaseProvider.get_location(id)
 
-        assertEquals("Bielefeld", test_location_name)
+    @Test
+    fun verifyIfComponentIsCorrect() {
+        // check if components exist
+        onView(withId(R.id.hotel_capacity)).check(matches(isDisplayed()))
+        onView(withId(R.id.hotel_description)).check(matches(isDisplayed()))
+        onView(withId(R.id.hotel_price)).check(matches(isDisplayed()))
+        onView(withId(R.id.hotel_category)).check(matches(isDisplayed()))
+        onView(withId(R.id.hotel_stars)).check(matches(isDisplayed()))
     }
+
 }

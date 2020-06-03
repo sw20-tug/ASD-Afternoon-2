@@ -10,4 +10,7 @@
     <item
         android:id="@+id/action_language"
         android:title="@string/action_language" />
+    <item
+            android:id="@+id/add_hotel"
+            android:title="@string/add_hotel" />
 </menu>
