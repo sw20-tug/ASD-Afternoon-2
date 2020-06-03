@@ -20,7 +20,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import androidx.fragment.app.testing.launchFragmentInContainer as launchFragmentInContainer1
 
-
 private const val PACKAGE_NAME = "com.example.asd.hotels"
 
 
