@@ -320,6 +320,11 @@ class MainActivity : AppCompatActivity() {
                 adapter_sort.notifyDataSetChanged()
                 true
             }
+           R.id.add_hotel -> {
+                val insertHotel = Intent(this.applicationContext, InsertHotelActivity::class.java)
+                this.applicationContext.startActivity(insertHotel)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -356,4 +361,3 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 }
-

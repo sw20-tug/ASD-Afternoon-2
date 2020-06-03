@@ -15,4 +15,7 @@
     <item
         android:id="@+id/action_reset"
         android:title="@string/resetString" />
+    <item
+            android:id="@+id/add_hotel"
+            android:title="@string/add_hotel" />
 </menu>

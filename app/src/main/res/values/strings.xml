@@ -1,14 +1,27 @@
 <resources>
     <string name="app_name">Hotels</string>
+
     <string name="action_settings">English</string>
     <string name="action_language">Deutsch</string>
+
+    <string name="add_hotel">Add Hotel</string>
+
     <string name="title_hotel_list">Hotels</string>
     <string name="title_hotel_detail">Hotel Detail</string>
-
     <string name="sorting_text">sort by</string>
     <string name="sorting_text_stars">stars</string>
     <string name="sorting_text_rating">rating</string>
     <string name="sorting_text_price">price</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="category">Category</string>
+    <string name="capacity">Capacity</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
+    <string name="stars">Stars</string>
+    <string name="insertHotel">Insert new hotel</string>
+    <string name="save">Save</string>
+
 
     <string name="hello_blank_fragment">Hello!</string>
 
