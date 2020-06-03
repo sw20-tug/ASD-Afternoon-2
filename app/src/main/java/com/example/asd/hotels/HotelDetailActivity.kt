@@ -86,7 +86,7 @@ class HotelDetailActivity(): AppCompatActivity() {
     fun addRating() {
         //val id = intent.getIntExtra("hotel_id", -1)
         val intent = Intent(this, HotelRatingActivity::class.java)
-        intent.putExtra("hotel_id", hotelData.hotel_id)
+        intent.putExtra("hotelData", hotelData)
         startActivity(intent)
     }
 
